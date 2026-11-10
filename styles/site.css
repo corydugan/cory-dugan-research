@@ -1,0 +1,359 @@
+/* =====================================================================
+   SITE TYPE-SCALE FIT. Site-specific, and it belongs here.
+
+   The canonical display scale is built for social cards and decks, where a
+   hero runs 52 to 84px. This site is denser and its hero was deliberately
+   capped at 37.6px. Those caps used to live inside the forked brand.css,
+   carrying the comments "capped at hero ceiling (37.6px)" and "under
+   ceiling", and the 2026-08-12 sync overwrote them because the fork was
+   diffed by token NAME rather than by VALUE. Nothing was missing; four
+   values were deliberately different, and replacing them made every section
+   h2 (57.6px) larger than the page h1 (37.6px) on nine pages.
+
+   brand.css is generated and must not be edited. Overriding here is the
+   correct place: the caps are a property of this site, not of the brand.
+   ===================================================================== */
+:root {
+  --fs-display-xl:  clamp(1.9rem, 2.9vw, 2.35rem);    /* capped at hero ceiling (37.6px) */
+  --fs-display-lg:  clamp(1.8rem, 2.7vw, 2.2rem);     /* under ceiling */
+  --fs-display-md:  clamp(1.6rem, 2.3vw, 1.9rem);     /* under ceiling */
+  --fs-stat:        clamp(1.8rem, 2.6vw, 2.2rem);     /* under ceiling */
+}
+
+/* SQUARE CORNERS. Cory's call 2026-10-02: rounded corners and pill shapes read as
+   templated. The brand motif is "squared editorial cards" (design system README,
+   section 4), so every radius token is zeroed here, for this site only. Circles
+   drawn with 50% (dots, markers) are shapes, not corners, and are left alone. */
+:root {
+  --radius-xs: 0; --radius-sm: 0; --radius-md: 0;
+  --radius-lg: 0; --radius-xl: 0; --radius-pill: 0;
+}
+
+/* =====================================================================
+   DR CORY DUGAN  ·  SHARED SITE COMPONENTS  ·  v3 "AUTHORITY"
+   Chrome (nav + footer + buttons) and the common component layer used
+   across every page. Inherits ALL tokens from brand.css (loaded first).
+   Do NOT hand-pick colours here; reference the --grape-* / --ink-* tokens.
+   Page-specific layout stays inline in each page's own <style>.
+   ===================================================================== */
+
+:root { --nav-h: 68px; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+.wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+.wrap-narrow { max-width: var(--container-narrow); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* Skip link (a11y) */
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: var(--space-4); top: var(--space-4); background: var(--grape-800); color: #fff; padding: var(--space-2) var(--space-4); border-radius: var(--radius-md); z-index: var(--z-toast); }
+
+/* ---------------------------------------------------------------------
+   NAV
+   --------------------------------------------------------------------- */
+header.nav { position: sticky; top: 0; z-index: var(--z-nav); background: var(--surface-veil); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--surface-rule); }
+.nav-in { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; border: 0; }
+.brand .wm { font-family: var(--font-serif); font-size: 21px; color: var(--surface-logo); line-height: 1; }
+.nav-links { display: flex; align-items: center; gap: var(--space-6); list-style: none; margin: 0; padding: 0; }
+.nav-links a { font-family: var(--font-sans); font-size: var(--fs-body-sm); color: var(--surface-fg-muted); text-decoration: none; border: 0; }
+.nav-links a:hover { color: var(--grape-800); }
+.nav-links a[aria-current="page"] { color: var(--grape-800); font-weight: var(--fw-medium); }
+
+.btn { font-family: var(--font-sans); font-weight: var(--fw-medium); font-size: var(--fs-body-sm); padding: 10px 20px; border-radius: 0; border: 1px solid transparent; text-decoration: none; display: inline-block; cursor: pointer; transition: background var(--dur-fast) var(--ease-out); }
+.btn-primary { background: var(--grape-800); color: #fff; }
+.btn-primary:hover { background: var(--grape-700); color: #fff; }
+.btn-ghost { background: transparent; color: var(--grape-800); border: 1px solid var(--grape-800); }
+.btn-ghost:hover { border-color: var(--grape-700); color: var(--grape-700); }
+/* nav <a> colour rule would otherwise override the button's white text */
+.nav-links a.btn-primary, .nav-links a.btn-primary:hover { color: #fff; }
+.btn:focus-visible { outline: 2px solid var(--grape-800); outline-offset: 2px; }
+
+.nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: var(--space-2); }
+.nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--grape-800); margin: 5px 0; }
+
+/* ---------------------------------------------------------------------
+   LAYOUT PRIMITIVES
+   --------------------------------------------------------------------- */
+.hero { padding: var(--section-y) 0 var(--section-y-tight); }
+.hero .eyebrow { display: block; margin-bottom: var(--space-5); }
+.hero h1{max-width:36ch;font-size:clamp(1.7rem, 2.9vw, 2.35rem);line-height:1.16;text-wrap:balance}
+.hero p.lead { margin-top: var(--space-6); }
+.hero .cta-row { display: flex; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-8); }
+
+section { padding: var(--section-y) 0; }
+section.tight { padding: var(--section-y-tight) 0; }
+.lede { max-width: 62ch; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; }
+
+/* Byline strip under a hero */
+.byline-strip { font-size: var(--fs-body-sm); color: var(--surface-fg-subtle); margin-top: var(--space-6); }
+
+/* Offer list: grape-ruled items */
+.offer-list { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: grid; gap: var(--space-5); }
+.offer-list li { padding: 2px 0; }
+.offer-list b { font-family: var(--font-sans); color: var(--surface-fg); }
+
+/* Numbered steps (3-up) */
+.steps { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-8); margin-top: var(--space-10); }
+.step .numeral { display: block; margin-bottom: var(--space-3); }
+.step h3 { font-family: var(--font-sans); font-size: var(--fs-heading-md); margin: 0 0 var(--space-2); }
+
+/* Numbered stages (rows) */
+.stages { margin-top: var(--space-10); border-top: 1px solid var(--surface-rule); }
+.stage { display: grid; grid-template-columns: 1fr; gap: var(--space-8); padding: var(--space-10) 0; border-bottom: 1px solid var(--surface-rule); }
+.stage .numeral { line-height: 1.1; }
+.stage h3 { font-family: var(--font-sans); font-size: var(--fs-heading-lg); font-weight: var(--fw-medium); margin: 0 0 var(--space-3); }
+.stage p { max-width: 62ch; margin: 0; }
+.stage p + p { margin-top: var(--space-3); }
+
+/* Stat band */
+.statband { border-top: 1px solid var(--surface-rule); border-bottom: 1px solid var(--surface-rule); padding: var(--space-10) 0; margin-top: var(--space-6); }
+.statband .row { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-8); }
+.statband .method-label { display: block; margin-bottom: var(--space-3); }
+.statband .stat { display: block; }
+.statband .cap { display: block; margin-top: var(--space-3); color: var(--surface-fg-muted); font-size: var(--fs-body-sm); max-width: 30ch; }
+
+/* Tool / offer cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: var(--space-6); }
+.tool-card { display: flex; flex-direction: column; border: 1px solid var(--surface-rule); border-radius: var(--radius-lg); padding: var(--space-8); background: var(--paper); text-decoration: none; transition: border-color var(--dur-fast) var(--ease-out); }
+.tool-card:hover { border-color: var(--grape-800); }
+.tool-card .tag { font-family: var(--font-sans); font-size: var(--fs-micro); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--grape-800); margin-bottom: var(--space-4); }
+.tool-card h3 { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-heading-lg); margin: 0 0 var(--space-3); color: var(--ink-1000); }
+.tool-card p { margin: 0; color: var(--surface-fg-muted); font-size: var(--fs-body-sm); line-height: var(--lh-body); flex: 1; }
+.tool-card .go { margin-top: var(--space-6); font-family: var(--font-sans); font-size: var(--fs-body-sm); font-weight: var(--fw-medium); color: var(--grape-800); }
+
+/* FAQ */
+.faq-list { margin-top: var(--space-10); border-top: 1px solid var(--surface-rule); }
+.faq-item { padding: var(--space-8) 0; border-bottom: 1px solid var(--surface-rule); }
+.faq-item h3 { font-family: var(--font-sans); font-size: var(--fs-heading-md); font-weight: var(--fw-medium); margin: 0 0 var(--space-3); color: var(--surface-fg); }
+.faq-item p { max-width: 62ch; margin: 0; }
+
+/* Soft-surface section */
+.soft { background: var(--ink-050); }
+
+/* CTA band: grape hairline rules top and bottom */
+.ctaband { background: var(--paper); border-top: 1px solid var(--surface-rule); border-bottom: 1px solid var(--surface-rule); }
+.ctaband h2 { color: var(--grape-800); }
+.ctaband p { color: var(--surface-fg-muted); }
+.ctaband .btn-on { background: var(--grape-800); color: #fff; }
+.ctaband .btn-on:hover { background: var(--grape-700); color: #fff; }
+
+/* ---------------------------------------------------------------------
+   CALLOUT TREATMENTS  (box-emphasis tiers)
+   wash = quiet tint · accent = white card + top rule · tint = grape wash ·
+   solid = grape fill (the ONE high-emphasis box per page).
+   The `html:root` prefix bumps specificity (0,2,1) so a treatment beats a
+   page's own inline base-box rule (e.g. .form-card{background:#fff},
+   .rpack .buy{background:paper}, .who .cell{border-top:...}), which would
+   otherwise win by loading after site.css. Property values are unchanged.
+   --------------------------------------------------------------------- */
+html:root .callout--wash{background:var(--grape-050);border:1px solid var(--grape-100);border-radius:var(--radius-lg);padding:var(--space-8)}
+html:root .callout--wash h3,html:root .callout--wash h4{color:var(--grape-800)}
+html:root .callout--accent{background:var(--paper);border:1px solid var(--surface-rule);border-radius:var(--radius-lg);padding:var(--space-8);box-shadow:var(--shadow-sm)}
+html:root .callout--accent h3,html:root .callout--accent h4{color:var(--grape-800)}
+html:root .callout--tint{background:var(--grape-100);border:1px solid var(--grape-200);border-radius:var(--radius-lg);padding:var(--space-8)}
+html:root .callout--tint h3,html:root .callout--tint h4,html:root .callout--tint .price{color:var(--grape-800)}
+html:root .callout--solid{background:var(--grape-800);border:1px solid var(--grape-900);border-radius:var(--radius-lg);padding:var(--space-8);box-shadow:var(--shadow-md);color:#fff}
+html:root .callout--solid h3,html:root .callout--solid h4,html:root .callout--solid .price{color:#fff}
+html:root .callout--solid p{color:var(--grape-100)}
+html:root .callout--solid label,html:root .callout--solid .fine,html:root .callout--solid small{color:var(--grape-100)}
+html:root .callout--solid .btn-primary,html:root .callout--solid .btn-on{background:#fff;color:var(--grape-800)}
+html:root .callout--solid .btn-primary:hover,html:root .callout--solid .btn-on:hover{background:var(--grape-050)}
+html:root .callout--solid input{border-color:var(--grape-600)}
+
+/* ---------------------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------------------- */
+footer.site { background: var(--surface-footer); color: var(--ink-300); padding: var(--space-16) 0 var(--space-10); font-size: var(--fs-body-sm); }
+footer.site a { color: var(--ink-300); text-decoration: none; border: 0; }
+footer.site a:hover { color: #fff; }
+footer.site a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.foot-top { display: flex; justify-content: space-between; gap: var(--space-16); flex-wrap: wrap; }
+.foot-brand .wm { font-family: var(--font-serif); font-size: 20px; color: #fff; }
+.foot-brand p { color: var(--ink-300); max-width: 40ch; margin-top: var(--space-3); }
+.foot-cols { display: flex; gap: var(--space-16); flex-wrap: wrap; }
+.foot-col .foot-h { font-family: var(--font-sans); font-size: var(--fs-meta); font-weight: var(--fw-semibold); line-height: var(--lh-heading); text-transform: uppercase; letter-spacing: var(--tracking-tag); color: var(--ink-400); margin: 0 0 var(--space-3); }
+.foot-col a { display: block; margin-bottom: var(--space-2); }
+.foot-fine { margin-top: var(--space-12); padding-top: var(--space-5); border-top: 1px solid rgba(255,255,255,.1); color: var(--ink-400); }
+.foot-fine a { color: var(--ink-400); }
+.foot-fine a:hover { color: #fff; }
+
+/* ---------------------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------------------- */
+@media (max-width: 1000px) { .nav-links { gap: var(--space-4); } }
+@media (max-width: 900px) {
+  .nav-links { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; flex-direction: column; align-items: flex-start; background: var(--surface); border-bottom: 1px solid var(--surface-rule); padding: var(--space-5) var(--gutter); gap: var(--space-5); }
+  .nav-links.show { display: flex; }
+  .nav-toggle { display: block; }
+}
+@media (max-width: 760px) {
+  .statband .row { grid-template-columns: 1fr; gap: var(--space-8); }
+  .two { grid-template-columns: 1fr; gap: var(--space-8); }
+  .steps { grid-template-columns: 1fr; }
+  .stage { grid-template-columns: 1fr; gap: var(--space-3); }
+  .hero h1, .router-hero h1 { font-size: clamp(1.7rem, 7vw, 2.35rem); }
+  .foot-top { gap: var(--space-8); }
+  .foot-cols { gap: var(--space-8); }
+}
+
+/* Moved out of brand.css 2026-08-12. brand.css is now a generated artifact of
+   the design system and carries no site-specific rules; this focus ring is
+   site chrome, so it lives here. */
+a:focus-visible{outline:2px solid var(--grape-800);outline-offset:2px;border-radius:0}
+/* Body links carry a real underline, not only a bottom border (2026-10-05,
+   accessibility: text-decoration is what assistive tools and high-contrast
+   modes read as a link). Buttons, nav, brand and footer keep their own none. */
+a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; border-bottom: 0; }
+.btn, .brand, .nav-links a, footer.site a, .tool-card { text-decoration: none; }
+
+/* =====================================================================
+   INK SURFACE, full bleed.
+
+   Set data-surface="ink" on <html> and the whole page flips: field, nav,
+   cards, footer. Added 2026-08-13 for /workplaces, /research and /tools.
+
+   Why an override block rather than rewriting every rule: the callout
+   system reads RAW palette tokens (--grape-050, --grape-100, --grape-800),
+   which by design do not change between surfaces. Repointing them all at
+   --surface-* would have changed the paper pages too, and paper is the
+   default and already correct. This block only fires on ink.
+   ===================================================================== */
+[data-surface="ink"] .callout--wash,
+html:root[data-surface="ink"] .callout--wash {
+  background: var(--surface-fill);
+  border-color: var(--surface-fill-edge);
+  border-left-color: var(--surface-accent);
+}
+html:root[data-surface="ink"] .callout--wash h3,
+html:root[data-surface="ink"] .callout--wash h4 { color: var(--surface-fg); }
+
+html:root[data-surface="ink"] .callout--accent {
+  background: var(--surface-fill);
+  border-color: var(--surface-fill-edge);
+  border-top-color: var(--surface-accent);
+  box-shadow: none;
+}
+html:root[data-surface="ink"] .callout--accent h3,
+html:root[data-surface="ink"] .callout--accent h4 { color: var(--surface-fg); }
+
+html:root[data-surface="ink"] .callout--tint {
+  background: var(--surface-fill);
+  border-color: var(--surface-fill-edge);
+}
+html:root[data-surface="ink"] .callout--tint h3,
+html:root[data-surface="ink"] .callout--tint h4,
+html:root[data-surface="ink"] .callout--tint .price { color: var(--surface-fg); }
+
+/* The ONE solid box per page. On ink it stays the loudest thing, so it
+   takes grape-500, the ink accent, with ink-max text reversed out of it.
+   White on grape-500 is 4.16:1 and LARGE TEXT ONLY, so the text is the
+   dark field colour instead, which is 4.73:1 and safe at any size. */
+html:root[data-surface="ink"] .callout--solid {
+  background: var(--surface-fill);
+  border-color: var(--surface-fill-edge);
+  color: var(--surface-on-fill);
+}
+html:root[data-surface="ink"] .callout--solid h3,
+html:root[data-surface="ink"] .callout--solid h4,
+html:root[data-surface="ink"] .callout--solid .price,
+html:root[data-surface="ink"] .callout--solid p,
+html:root[data-surface="ink"] .callout--solid label,
+html:root[data-surface="ink"] .callout--solid .fine,
+html:root[data-surface="ink"] .callout--solid small { color: var(--surface-on-fill); }
+html:root[data-surface="ink"] .callout--solid .btn-primary,
+html:root[data-surface="ink"] .callout--solid .btn-on {
+  background: var(--ink-max); color: var(--surface-on-fill); border-color: var(--ink-max);
+}
+
+/* Buttons: grape-800 is 2.9:1 on the ink field, too dark to sit on it.
+   The ink accent is grape-500. */
+[data-surface="ink"] .btn-primary { background: var(--surface-fill); color: var(--surface-on-fill); border-color: var(--surface-fill-edge); }
+[data-surface="ink"] .btn-primary:hover { background: var(--grape-700); color: var(--surface-on-fill); }
+[data-surface="ink"] .nav-links a.btn-primary,
+[data-surface="ink"] .nav-links a.btn-primary:hover { color: var(--ink-max); }
+[data-surface="ink"] .btn-ghost { color: var(--surface-fg); border-color: var(--surface-fg-subtle); }
+[data-surface="ink"] .ctaband .btn-on { background: var(--surface-fill); color: var(--surface-on-fill); border-color: var(--surface-fill-edge); }
+
+/* Headings and links inherit the field. */
+[data-surface="ink"] h1, [data-surface="ink"] h2,
+[data-surface="ink"] h3, [data-surface="ink"] h4 { color: var(--surface-fg); }
+[data-surface="ink"] a { color: var(--surface-accent); }
+[data-surface="ink"] .eyebrow { color: var(--surface-eyebrow); }
+[data-surface="ink"] .tool-card .go,
+[data-surface="ink"] .go { color: var(--surface-accent); }
+
+/* The footer already sat dark on paper. On ink it lifts to ink-900 so it
+   still reads as a distinct band rather than merging with the field. */
+[data-surface="ink"] footer.site { border-top: 1px solid var(--ink-900); }
+
+/* Cards on ink are OUTLINED, not filled. An ink-900 fill sat at 1.38:1
+   against the ink-max field, under the 3:1 floor for a graphical object, so
+   the card edge was not discernible, and accent text on that fill fell to
+   3.44:1. Dropping the fill and using an ink-500 border (3.93:1) makes the
+   boundary legible and returns accent text to 4.73:1 against the field.
+   It also matches README section 6: cards lean on borders, not shadow. */
+
+/* The site rules that still read RAW palette tokens. Those are deliberate on
+   paper (grape-800 is the paper accent) and wrong on ink, where grape-800 is
+   2.9:1 against the field. */
+[data-surface="ink"] .nav-links a:hover,
+[data-surface="ink"] .nav-links a[aria-current="page"] { color: var(--surface-accent); }
+[data-surface="ink"] .nav-toggle span { background: var(--surface-fg); }
+[data-surface="ink"] .btn-ghost { color: var(--surface-fg); border-color: var(--surface-fg-subtle); }
+[data-surface="ink"] .btn-ghost:hover { color: var(--surface-accent); border-color: var(--surface-accent); }
+[data-surface="ink"] .btn:focus-visible { outline-color: var(--surface-accent); }
+[data-surface="ink"] .skip:focus { background: var(--surface-accent); color: var(--ink-max); }
+[data-surface="ink"] .offer-list li { border-left-color: var(--surface-accent); }
+[data-surface="ink"] .statband { border-top-color: var(--surface-fg); }
+[data-surface="ink"] .tool-card { background: var(--surface-fill); border-color: var(--surface-fill-edge); }
+[data-surface="ink"] .tool-card:hover { border-color: var(--surface-accent); }
+/* .tool-card .tag reads --grape-800, which is 2.9:1 on the ink field and
+   renders as a dim purple smudge at micro size. */
+[data-surface="ink"] .tool-card .tag { color: var(--surface-eyebrow); }
+/* Last three that would have shown a paper colour on the ink field:
+   .soft is an off-white section band, the cta hover reverted to grape-700
+   (2.4:1 on ink), and the global focus ring was grape-800 (2.9:1), which is
+   an accessibility failure, not a cosmetic one. */
+[data-surface="ink"] .soft { background: var(--ink-900); }
+[data-surface="ink"] .ctaband .btn-on:hover { background: var(--grape-700); color: var(--surface-on-fill); }
+[data-surface="ink"] a:focus-visible,
+[data-surface="ink"] .btn:focus-visible { outline-color: var(--surface-accent); }
+
+/* =====================================================================
+   FIGURES · the minimal visualisations.
+
+   Rule: design system README, "Show it, do not only say it". Shapes come
+   from BRAND/drCWD Concept-Diagram Visual Language_CD.md, the same library
+   the social diagrams use. Line art reads --surface-stroke, labels read
+   --surface-fg-muted, and exactly ONE element is filled with --surface-fill.
+   Everything below is surface-aware, so a figure works on paper and on ink
+   without a second version.
+   ===================================================================== */
+.figure { margin: var(--space-8) 0 var(--space-10); max-width: 560px; }
+.figure svg { display: block; overflow: visible; width: 100%; height: auto; }
+.figure .method-label { display: block; margin-bottom: var(--space-3); }
+.figure figcaption {
+  font-family: var(--font-sans); font-size: var(--fs-meta);
+  color: var(--surface-fg-subtle); line-height: var(--lh-tight);
+  margin-top: var(--space-4); max-width: 46ch;
+}
+.figure .fig-line   { stroke: var(--surface-stroke); fill: none; }
+.figure .fig-fill   { fill: var(--surface-fill); stroke: var(--surface-fill-edge); }
+.figure .fig-lbl    { font-family: var(--font-sans); font-size: 13px; fill: var(--surface-fg-muted); }
+.figure .fig-lbl-on { font-family: var(--font-sans); font-size: 13px; fill: var(--surface-on-fill); }
+.figure .fig-micro  { font-family: var(--font-sans); font-size: 11px; letter-spacing: .08em;
+                      text-transform: uppercase; fill: var(--surface-fg-subtle); }
+.figure .fig-num    { font-family: var(--font-figures); font-weight: var(--fw-bold);
+                      font-variant-numeric: tabular-nums lining-nums; fill: var(--surface-fg-strong); }
+.figure .fig-num-on { font-family: var(--font-figures); font-weight: var(--fw-bold);
+                      font-variant-numeric: tabular-nums lining-nums; fill: var(--surface-on-fill); }
+.figure .fig-mark   { stroke: var(--surface-fg-strong); }
+@media (max-width: 640px) { .figure { max-width: 100%; } }
+
+/* d02, 2026-09-29: one deliberate arrow, on the main hero button only */
+.router-hero .cta-row .btn-primary::after, .hero .cta-row .btn-primary::after { content: "\00a0\2192"; }
+
+/* 2026-10-05: long DOI links in Sources lists pushed article pages sideways on phones; let them wrap */
+main a[href*="doi.org/"] { overflow-wrap: anywhere; }

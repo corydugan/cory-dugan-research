@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<!-- chrome:head -->
+<!-- Shared head. Synced across every page by partials/sync_chrome.py.
+     Page-specific tags (title, description, canonical, OG/Twitter, JSON-LD,
+     inline <style>) live OUTSIDE these markers in each page. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#352051">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts load without blocking the first paint (2026-10-05, PageSpeed Insights: about 900 ms render-blocking) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="styles/brand.css">
+<link rel="stylesheet" href="styles/site.css">
+<!-- /chrome:head -->
+
+<title>Iron and Women's Health Research | Dr Cory Dugan</title>
+<meta name="description" content="Research on iron deficiency and women's health, with plain-language summaries of each paper.">
+<meta property="og:title" content="Iron and Women's Health Research | Dr Cory Dugan">
+<meta property="og:description" content="Research on iron deficiency and women's health, with plain-language summaries of each paper.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_AU">
+<meta property="og:image" content="https://drcorydugan.com/images/og/research.png">
+<meta property="og:image:alt" content="Iron and women&#x27;s health research, Dr Cory Dugan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Iron and Women's Health Research | Dr Cory Dugan">
+<meta name="twitter:description" content="Research on iron deficiency and women's health, with plain-language summaries of each paper.">
+<meta name="twitter:image" content="https://drcorydugan.com/images/og/research.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": "https://drcorydugan.com/research",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Dr Cory Dugan",
+    "honorificPrefix": "Dr",
+    "honorificSuffix": "PhD",
+    "url": "https://drcorydugan.com/",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Western Australia"
+    },
+    "sameAs": [
+      "https://orcid.org/0000-0001-5546-3465",
+      "https://scholar.google.com/citations?user=p0WPZ_sAAAAJ&hl=en",
+      "https://www.researchgate.net/profile/Cory-Dugan",
+      "https://www.linkedin.com/in/cory-dugan-phd"
+    ],
+    "@id": "https://drcorydugan.com/#cory"
+  }
+}
+</script>
+
+<style>
+  .selected { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: grid; gap: var(--space-5); max-width: 820px; }
+  .selected li { padding: 2px 0; }
+  .selected b { color: var(--color-fg); }
+
+
+  /* Publications list */
+  .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .wrap-pubs { max-width: var(--container-wide); }
+  .withside { display: flex; gap: var(--space-8); align-items: flex-start; }
+  .withside .listcol { flex: 1 1 auto; min-width: 0; }
+  .pub-list { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-6); }
+  .pub-card { position: relative; background: var(--paper); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: var(--space-5) var(--space-6); transition: border-color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out); }
+  .pub-card:hover { border-color: var(--grape-200); }
+  .pub-card.is-open { border-color: var(--grape-200); background: var(--grape-050); }
+  .pub-meta-row { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-2); }
+  .pub-journal { font-size: var(--fs-micro); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: var(--tracking-tag); color: var(--grape-800); }
+  .pub-year { font-family: var(--font-figures); font-size: var(--fs-meta); font-weight: var(--fw-medium); color: var(--color-fg-subtle); font-variant-numeric: tabular-nums; }
+  .pub-role { font-size: var(--fs-micro); font-weight: var(--fw-medium); text-transform: uppercase; letter-spacing: var(--tracking-tag); color: var(--grape-800); background: var(--grape-100); padding: 2px 8px; border-radius: var(--radius-pill); }
+  .pub-title { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-heading-md); line-height: 1.3; margin: 0 0 var(--space-2); color: var(--color-fg); }
+  .pub-open { all: unset; cursor: pointer; text-wrap: pretty; }
+  .pub-open::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+  .pub-open:focus-visible { outline: none; }
+  .pub-card:has(.pub-open:focus-visible) { outline: 2px solid var(--grape-800); outline-offset: 2px; }
+  .pub-authors { font-size: var(--fs-body-sm); color: var(--color-fg-subtle); line-height: 1.5; margin: 0; }
+  .pub-authors strong { color: var(--color-fg-muted); font-weight: var(--fw-semibold); }
+  .pub-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--ink-100); }
+  .pub-tags { font-size: var(--fs-meta); color: var(--color-fg-subtle); }
+  .pub-actions { display: flex; align-items: center; gap: var(--space-4); margin-left: auto; }
+  .pub-peek { font-size: var(--fs-meta); font-weight: var(--fw-semibold); color: var(--grape-800); }
+  .pub-peek.is-empty { color: var(--color-fg-subtle); font-weight: var(--fw-medium); }
+  .pub-link { position: relative; z-index: 1; font-size: var(--fs-meta); font-weight: var(--fw-medium); }
+  .pub-link::after { content: " \2197"; }
+  .pub-nolink { font-size: var(--fs-meta); color: var(--color-fg-subtle); }
+  .thesis-card .pub-journal { color: var(--grape-800); }
+  .thesis-card .pub-tag { font-size: var(--fs-micro); font-weight: var(--fw-medium); text-transform: uppercase; letter-spacing: var(--tracking-tag); color: var(--grape-800); background: var(--grape-100); padding: 2px 8px; border-radius: var(--radius-pill); }
+  .thesis-card .pub-title { font-size: var(--fs-display-sm); margin-bottom: var(--space-2); }
+
+  /* The side panel */
+  #pub-side { flex: 0 0 clamp(360px, 32vw, 460px); position: sticky; top: 84px; max-height: calc(100vh - 104px); overflow: auto; overscroll-behavior: contain; background: var(--paper); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: var(--space-6); margin-top: var(--space-12); }
+  #pub-side:focus { outline: none; }
+  .ps-top { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-3); }
+  .ps-close { border: 0; background: transparent; color: var(--color-fg-subtle); font: var(--fw-medium) var(--fs-meta)/1 var(--font-sans); cursor: pointer; padding: 10px 12px; min-height: 44px; min-width: 44px; }
+  .ps-close:hover { color: var(--grape-800); }
+  .ps-close:focus-visible { outline: 2px solid var(--grape-800); outline-offset: 2px; }
+  .ps-kicker { font-size: var(--fs-micro); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--grape-700); }
+  .ps-title { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-display-sm); line-height: 1.12; letter-spacing: var(--tracking-display); margin: var(--space-2) 0 var(--space-4); color: var(--color-fg); }
+  .ps-title--long { font-size: var(--fs-heading-lg); line-height: 1.25; letter-spacing: 0; }
+  .ps-q { font-size: var(--fs-body); line-height: 1.55; color: var(--color-fg); margin: 0 0 var(--space-5); }
+  .ps-fig { margin: 0 0 var(--space-5); padding: var(--space-4) var(--space-4) var(--space-3); background: var(--grape-050); border-radius: var(--radius-sm); }
+  .ps-fig svg { display: block; width: 100%; height: auto; }
+  /* Phone width: give the figure the full panel width so its 12px labels are
+     not scaled below about 12px on screen (2026-09-30 design review). */
+  @media (max-width: 480px) { .ps-fig { padding: var(--space-3) 8px var(--space-2); margin-inline: calc(-1 * var(--space-3)); } }
+  .ps-fig figcaption { font-size: var(--fs-meta); color: var(--color-fg-subtle); margin-top: var(--space-2); line-height: 1.45; }
+  .ps-h { font-size: var(--fs-micro); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--color-fg-subtle); margin: 0 0 var(--space-2); }
+  .ps-find { margin: 0 0 var(--space-5); padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+  .ps-find li { position: relative; padding-left: var(--space-4); font-size: var(--fs-body-sm); line-height: 1.55; color: var(--color-fg-muted); }
+  .ps-find li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--grape-600); }
+  .ps-why { font-size: var(--fs-body-sm); line-height: 1.55; color: var(--color-fg-muted); margin: 0 0 var(--space-5); }
+  .ps-src { font-size: var(--fs-meta); line-height: 1.5; color: var(--color-fg-subtle); border-top: 1px solid var(--color-border); padding-top: var(--space-3); margin: 0 0 var(--space-4); }
+  .ps-empty p:not([class]), .ps-empty .ps-hint { font-size: var(--fs-body-sm); color: var(--color-fg-muted); line-height: 1.6; margin: 0 0 var(--space-4); }
+  .ps-hint { color: var(--color-fg-subtle); }
+  .ps-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+  .pf-num { font-family: var(--font-figures); font-weight: 700; fill: var(--grape-800); font-variant-numeric: tabular-nums; }
+  .pf-num-on { font-family: var(--font-figures); font-weight: 700; fill: #fff; }
+  .pf-lbl { font-family: var(--font-sans); font-size: 12px; fill: var(--ink-700); }
+  .pf-lbl-on { font-family: var(--font-sans); font-size: 12px; fill: #fff; }
+  .pf-lbl-onb { font-family: var(--font-sans); font-size: 12px; font-weight: 600; fill: #fff; }
+  .pf-lbl-b { font-family: var(--font-sans); font-size: 12px; font-weight: 600; fill: var(--ink-1000); }
+  .pf-micro { font-family: var(--font-sans); font-size: 10px; letter-spacing: .04em; fill: var(--ink-500); }
+  .pf-p1 { fill: var(--grape-800); } .pf-p2 { fill: var(--grape-600); } .pf-p3 { fill: var(--grape-200); } .pf-p4 { fill: var(--grape-100); } .pf-p5 { fill: #fff; stroke: var(--grape-200); }
+  .pf-ln { stroke: var(--grape-600); stroke-width: 1.5; fill: none; }
+  .pf-track { fill: var(--ink-100); }
+
+  @media (max-width: 1100px) {
+    .withside { display: block; }
+    #pub-side { position: fixed; inset: 0 0 0 auto; width: min(96vw, 520px); max-height: none; margin: 0; border-radius: 0; border-width: 0 0 0 1px; z-index: var(--z-modal); box-shadow: -12px 0 40px rgba(28,28,30,.12); transform: translateX(102%); visibility: hidden; transition: transform var(--dur-slow) var(--ease-out), visibility 0s linear var(--dur-slow); }
+    #pub-side.is-open { transform: none; visibility: visible; transition: transform var(--dur-slow) var(--ease-out); }
+    #pub-side .ps-empty { display: none; }
+  }
+  @media (max-width: 480px) {
+    .pub-card { padding: var(--space-4); }
+    #pub-side { width: 100vw; padding: var(--space-5) var(--space-4); }
+  }
+  @media (prefers-reduced-motion: reduce) { #pub-side, .pub-card { transition: none !important; } }
+  .conf-list { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-8); }
+  .conf-item { padding: var(--space-4) var(--space-5); background: var(--ink-050); border-radius: var(--radius-sm); }
+  .conf-title { font-size: var(--fs-body-sm); font-weight: var(--fw-medium); color: var(--color-fg); margin-bottom: 4px; }
+  .conf-meta { font-size: var(--fs-meta); color: var(--color-fg-subtle); }
+  .conf-meta strong { color: var(--color-fg-muted); }
+
+  .thesis-card { border: 2px solid var(--grape-800); border-radius: var(--radius-md); padding: var(--space-6) var(--space-8); background: var(--grape-050); margin-top: var(--space-8); }
+  .thesis-card .pub-title { font-size: var(--fs-display-sm); margin-bottom: var(--space-2); }
+
+  .subhead { font-family: var(--font-sans); font-size: var(--fs-micro); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: var(--tracking-method); color: var(--grape-800); margin: var(--space-12) 0 var(--space-2); }
+
+  /* Talk: our own thumbnail, swapped for the Cassyni player on click. ?t=3030 cues 50:30, the start of my talk. */
+  #talk { scroll-margin-top: var(--nav-h); }
+  .talk-embed { aspect-ratio: 16 / 9; margin-top: var(--space-4); background: var(--ink-max); }
+  .talk-poster { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .talk-poster img { display: block; width: 100%; height: 100%; }
+  .talk-poster:focus-visible { outline: 2px solid var(--grape-800); outline-offset: 2px; }
+  .talk-embed iframe { display: block; width: 100%; height: 100%; border: 0; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- chrome:header -->
+<!-- Shared nav. Synced across every page by partials/sync_chrome.py. -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <span class="brand">
+      <svg width="26" height="26" viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" rx="22" fill="#352051"/><polygon points="48,29 27,67 69,67" fill="#fff"/></svg>
+      <span class="wm">Dr Cory Dugan</span>
+    </span>
+  </div>
+</header>
+<!-- /chrome:header -->
+
+<main id="main" tabindex="-1">
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Iron and women's health research</h1>
+      <p class="lead">I am a PhD health scientist working at the intersection of women's health, iron metabolism, and health data. My research is published, and cited in World Health Organization guidance on patient blood management. I now build the screening and analysis tools that put that evidence to work, and I am extending that into health data and applied AI.</p>
+    </div>
+  </section>
+
+  <section class="tight" id="evidence">
+    <div class="wrap">
+      <h2>Evidence</h2>
+      <p class="lede">Work published in JAMA Network Open, Anaesthesia, the British Journal of Sports Medicine and the British Journal of Haematology. The World Health Organization cites it in <a href="https://www.who.int/publications/i/item/9789240104662" target="_blank" rel="noopener">Guidance on implementing patient blood management to improve global blood health status</a> (2024). Every tool I build is grounded in this body of work.</p>
+      <ul class="selected">
+        <li>IRONWOMAN randomised controlled trial of intravenous iron therapy in iron-deficient recreationally active women. British Journal of Sports Medicine, 2025. Lead author.</li>
+        <li>Iron optimisation in pregnancy, a Haematology in Obstetric and Women's Health Collaborative consensus statement. Internal Medicine Journal, 2025. Co-author.</li>
+        <li>Systematic review of intravenous iron in non-anaemic iron deficiency, the work that guidance cites.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="tight" id="talk">
+    <div class="wrap">
+      <h2>Breaking the Silence on Women's Health</h2>
+      <p class="lede">A recorded Cassyni seminar, presented with Darsiha Balakirishnan, Fanija Dukovski, Hayley Caratti, Heather Bytheway and Talat Uppal.</p>
+      <div class="talk-embed">
+        <button type="button" class="talk-poster" data-src="https://cassyni.com/embed/events/HGAPFw1iQ9S2FXG2prPtVT?t=3030" aria-label="Play Breaking the Silence on Women's Health, from my talk">
+          <img src="images/cassyni-talk-thumbnail.png" alt="" width="1920" height="1080" loading="lazy">
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight" id="publications">
+    <div class="wrap wrap-pubs">
+      <h2>The full record</h2>
+      <p class="lede">The full profile with citations is on <a href="https://scholar.google.com/citations?user=p0WPZ_sAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+
+      <div class="withside">
+        <div class="listcol">
+      <div class="subhead">Peer-reviewed journal articles</div>
+      <div class="pub-list">
+
+        <article class="pub-card" data-pub="p01" data-href="https://doi.org/10.1016/j.tjnut.2026.101474">
+          <div class="pub-meta-row"><span class="pub-journal">The Journal of Nutrition</span><span class="pub-year">2026</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Effect of 2-year caloric restriction in the absence of malnutrition on indicators of anemia, iron status, and hepcidin in healthy adults: a randomized clinical trial</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, Das SK, Racette SB, Martin CK, Ravussin E, Redman LM, et al. <em>The Journal of Nutrition</em> 156(5).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Anaemia · Caloric Restriction · Hepcidin</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1016/j.tjnut.2026.101474" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p02" data-href="https://doi.org/10.1136/bjsports-2024-108240">
+          <div class="pub-meta-row"><span class="pub-journal">British Journal of Sports Medicine</span><span class="pub-year">2025</span><span class="pub-role">Lead Author · Randomised Trial</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Effect of intravenous iron therapy on exercise performance, fatigue scores and mood states in iron-deficient recreationally active females of reproductive age: a double-blind randomised controlled trial (IRONWOMAN)</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, Peeling P, Buissink P, MacLean B, Lim J, Jayasuriya P, et al. <em>British Journal of Sports Medicine</em> 59(13).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Iron Deficiency · Women's Health</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1136/bjsports-2024-108240" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p03" data-href="https://doi.org/10.1136/bjsports-2024-109240">
+          <div class="pub-meta-row"><span class="pub-journal">British Journal of Sports Medicine</span><span class="pub-year">2025</span><span class="pub-role">Lead Author</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Carbon monoxide inhalation to increase haemoglobin mass: a canary in a coal mine for sport?</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, Hennigar S. <em>British Journal of Sports Medicine</em> 59(11).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Sport Science · Haemoglobin Mass</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1136/bjsports-2024-109240" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p04" data-href="https://doi.org/10.1111/bjh.20075">
+          <div class="pub-meta-row"><span class="pub-journal">British Journal of Haematology</span><span class="pub-year">2025</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Greater prevalence of anaemia and heavy menstrual bleeding reported in women of reproductive age in the United Kingdom compared to Australia</button></h3>
+          <p class="pub-authors">MacLean B, Fuller J, Lim J, <strong>Dugan C</strong>, Richards T. <em>British Journal of Haematology</em> 206(5).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Anaemia · Women's Health · Heavy Menstrual Bleeding</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1111/bjh.20075" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p05" data-href="https://doi.org/10.1001/jamanetworkopen.2025.3093">
+          <div class="pub-meta-row"><span class="pub-journal">JAMA Network Open</span><span class="pub-year">2025</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Intravenous Iron-Induced Hypophosphatemia in Surgical Patients</button></h3>
+          <p class="pub-authors">Richards T, Wijaya LK, Lim J, <strong>Dugan C</strong>, Dahly D. <em>JAMA Network Open</em> 8(4).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Intravenous Iron · Surgery</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1001/jamanetworkopen.2025.3093" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p06" data-href="https://doi.org/10.1111/imj.16602">
+          <div class="pub-meta-row"><span class="pub-journal">Internal Medicine Journal</span><span class="pub-year">2025</span><span class="pub-role">Consensus Statement</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Iron optimisation in pregnancy: a Haematology in Obstetric and Women's Health Collaborative consensus statement</button></h3>
+          <p class="pub-authors">Clarke L, Froessler B, Tang C, King K, Ross B, Kidson-Gerber G, <strong>Dugan C</strong>, et al. <em>Internal Medicine Journal</em> 55(2).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Pregnancy · Iron Deficiency</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1111/imj.16602" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p07" data-href="https://doi.org/10.1111/vox.13750">
+          <div class="pub-meta-row"><span class="pub-journal">Vox Sanguinis</span><span class="pub-year">2025</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Community screening for iron deficiency in reproductive aged women: lessons learnt from Australia</button></h3>
+          <p class="pub-authors">MacLean B, Lim J, Fuller J, Wylie R, Joo JY, Al-Sharea A, ... <strong>Dugan C</strong>, Richards T. <em>Vox Sanguinis</em> 120(1).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Community Screening · Women's Health</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1111/vox.13750" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+
+
+        <article class="pub-card" data-pub="p09" data-href="https://doi.org/10.1136/bjsports-2024-108768">
+          <div class="pub-meta-row"><span class="pub-journal">British Journal of Sports Medicine</span><span class="pub-year">2024</span><span class="pub-role">Lead Author · PhD Academy Award</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Iron and women's health: a multidimensional exploration of iron deficiency, management and treatment in active women</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>. <em>British Journal of Sports Medicine</em> 58(23). BJSM PhD Academy Award.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Iron Deficiency · Women's Health</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1136/bjsports-2024-108768" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p10" data-href="https://doi.org/10.1007/s00421-024-05488-1">
+          <div class="pub-meta-row"><span class="pub-journal">European Journal of Applied Physiology</span><span class="pub-year">2024</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Temporal tracking of cysteine 34 oxidation of plasma albumin as a biomarker of muscle damage following a bout of eccentric exercise</button></h3>
+          <p class="pub-authors">James C, <strong>Dugan CW</strong>, Boyd C, Fournier PA, Arthur PG. <em>European Journal of Applied Physiology</em> 124(9).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Biomarkers · Muscle Damage</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1007/s00421-024-05488-1" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p11" data-href="https://doi.org/10.1186/s13643-024-02559-4">
+          <div class="pub-meta-row"><span class="pub-journal">Systematic Reviews</span><span class="pub-year">2024</span><span class="pub-role">Lead Author</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Efficacy of iron supplementation on physical capacity in non-anaemic iron-deficient individuals: protocol for an individual patient data meta-analysis</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, Peeling P, Burden R, Richards T. <em>Systematic Reviews</em> 13(1).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Meta-Analysis · Iron Supplementation</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1186/s13643-024-02559-4" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p12" data-href="https://doi.org/10.1016/j.jsams.2024.04.012">
+          <div class="pub-meta-row"><span class="pub-journal">Journal of Science and Medicine in Sport</span><span class="pub-year">2024</span><span class="pub-role">Lead Author</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">The relationship between menorrhagia, iron deficiency, and anaemia in recreationally active females: an exploratory population-based screening study</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, Peeling P, Davies A, MacLean B, Simpson A, Lim J, Richards T. <em>Journal of Science and Medicine in Sport</em> 27(7).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Menorrhagia · Screening</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1016/j.jsams.2024.04.012" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p13" data-href="https://doi.org/10.2147/ppa.s397122">
+          <div class="pub-meta-row"><span class="pub-journal">Patient Preference and Adherence</span><span class="pub-year">2023</span><span class="pub-role">Lead Author</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">The perceived impact of iron deficiency and iron therapy preference in exercising females of reproductive age: a cross-sectional survey study</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, Simpson A, Peeling P, Lim J, Davies A, Buissink P, MacLean B, et al. <em>Patient Preference and Adherence</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Patient Preferences · Iron Therapy</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.2147/ppa.s397122" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p14" data-href="https://doi.org/10.1111/trf.17274">
+          <div class="pub-meta-row"><span class="pub-journal">Transfusion</span><span class="pub-year">2023</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Non-erythropoiesis stimulating agent, non-iron therapies for the management of anemia: a scoping review</button></h3>
+          <p class="pub-authors">Davies AT, Devlin PM, <strong>Dugan C</strong>, Richards T, Miles LF. <em>Transfusion</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Anaemia · Scoping Review</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1111/trf.17274" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p15" data-href="https://doi.org/10.1080/17461391.2023.2224285">
+          <div class="pub-meta-row"><span class="pub-journal">European Journal of Sport Science</span><span class="pub-year">2023</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Timing is everything, but does it really matter? Impact of 8-weeks morning versus evening iron supplementation in ballet and contemporary dancers</button></h3>
+          <p class="pub-authors">Attwell C, McKay A, Sim M, <strong>Dugan C</strong>, Nicholas J, Hopper L, Peeling P. <em>European Journal of Sport Science</em> 23(12).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Iron Supplementation · Athletes</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1080/17461391.2023.2224285" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p16" data-href="https://doi.org/10.1002/jcsm.13114">
+          <div class="pub-meta-row"><span class="pub-journal">Journal of Cachexia, Sarcopenia and Muscle</span><span class="pub-year">2022</span><span class="pub-role">Lead Author · Cited by the World Health Organization</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Systematic review and meta-analysis of intravenous iron therapy for adults with non-anaemic iron deficiency: an abridged Cochrane review</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, Cabolis K, Miles LF, Richards T. <em>Journal of Cachexia, Sarcopenia and Muscle</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Meta-Analysis · Intravenous Iron</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1002/jcsm.13114" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p17" data-href="https://doi.org/10.1136/bmjopen-2021-059059">
+          <div class="pub-meta-row"><span class="pub-journal">BMJ Open</span><span class="pub-year">2022</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Non-erythropoiesis-stimulating agent, non-iron therapies for the management of anaemia: protocol for a scoping review</button></h3>
+          <p class="pub-authors">Devlin P, Davies A, <strong>Dugan C</strong>, Richards T, Miles LF. <em>BMJ Open</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Anaemia · Scoping Review Protocol</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1136/bmjopen-2021-059059" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p18" data-href="https://doi.org/10.1007/s00421-022-04979-3">
+          <div class="pub-meta-row"><span class="pub-journal">European Journal of Applied Physiology</span><span class="pub-year">2022</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">The influence of rest break frequency and duration on physical performance and psychophysiological responses: a mining simulation study</button></h3>
+          <p class="pub-authors">Uchiyama K, King J, Wallman K, Taggart S, <strong>Dugan C</strong>, Girard O. <em>European Journal of Applied Physiology</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Occupational Health · Mining Simulation</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1007/s00421-022-04979-3" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p19" data-href="https://doi.org/10.3390/nu14091936">
+          <div class="pub-meta-row"><span class="pub-journal">Nutrients</span><span class="pub-year">2022</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Dietary iron and the elite dancer</button></h3>
+          <p class="pub-authors">Attwell C, <strong>Dugan C</strong>, McKay AKA, Nicholas J, Hopper L, Peeling P. <em>Nutrients</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Dietary Iron · Dancers</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.3390/nu14091936" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+
+        <article class="pub-card" data-pub="p20" data-href="https://doi.org/10.1111/anae.15432">
+          <div class="pub-meta-row"><span class="pub-journal">Anaesthesia</span><span class="pub-year">2021</span><span class="pub-role">Lead Author</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">The misogyny of iron deficiency</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, MacLean B, Cabolis K, Abeysiri S, Khong A, Sajic M, et al. <em>Anaesthesia</em>. Wiley Top Downloaded Article 2021.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Women's Health · Narrative Review</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1111/anae.15432" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p21" data-href="https://doi.org/10.1210/clinem/dgab881">
+          <div class="pub-meta-row"><span class="pub-journal">The Journal of Clinical Endocrinology &amp; Metabolism</span><span class="pub-year">2021</span><span class="pub-role">Lead Author</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Effects of simulated high altitude on blood glucose levels during exercise in individuals with type 1 diabetes</button></h3>
+          <p class="pub-authors"><strong>Dugan CW</strong>, Maloney SK, Abramoff KJ, Panag SS, Davis EA, Jones TW, et al. <em>The Journal of Clinical Endocrinology &amp; Metabolism</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Type 1 Diabetes · Altitude</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1210/clinem/dgab881" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+        <article class="pub-card" data-pub="p22" data-href="https://doi.org/10.1097/MD.0000000000027271">
+          <div class="pub-meta-row"><span class="pub-journal">Medicine</span><span class="pub-year">2021</span><span class="pub-role">Lead Author</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">The need to screen for anemia in exercising women</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, Scott C, Abeysiri S, Baikady RR, Richards T. <em>Medicine</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Anaemia Screening · Women's Health</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><a class="pub-link" href="https://doi.org/10.1097/MD.0000000000027271" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></span>
+          </div>
+        </article>
+
+
+      </div>
+
+      <div class="subhead">Articles for practitioners</div>
+      <div class="pub-list">
+        <article class="pub-card" data-pub="p23">
+          <div class="pub-meta-row"><span class="pub-journal">Sports Injury Bulletin</span><span class="pub-year">2025</span><span class="pub-role">Lead Author</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Ironing out iron deficiency in female athletes</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong>, Hensen W. <em>Sports Injury Bulletin</em> 22(1).</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Iron Deficiency · Female Athletes</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><span class="pub-nolink">No public link yet</span></span>
+          </div>
+        </article>
+        <article class="pub-card" data-pub="p24">
+          <div class="pub-meta-row"><span class="pub-journal">Nutrition X-Change</span><span class="pub-year">2022</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">Iron and the athlete</button></h3>
+          <p class="pub-authors">Peeling P, McKay A, McCormick R, <strong>Dugan C</strong>, Sim M. <em>Nutrition X-Change</em> Vol. 13.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Iron · Athletes</span>
+            <span class="pub-actions"><span class="pub-peek" aria-hidden="true">Summary</span><span class="pub-nolink">No public link yet</span></span>
+          </div>
+        </article>
+      </div>
+      <div class="subhead">Under review</div>
+      <div class="pub-list">
+        <article class="pub-card" data-pub="p25">
+          <div class="pub-meta-row"><span class="pub-journal">Healthcare</span><span class="pub-year">Under review</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">TikTok videos on iron deficiency: a cross-sectional content analysis</button></h3>
+          <p class="pub-authors">Lim J, MacLean B, <strong>Dugan C</strong>, Hines E, Clement I, Richards T. <em>Healthcare</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Content Analysis · Iron Deficiency</span>
+            <span class="pub-actions"><span class="pub-peek is-empty" aria-hidden="true">Details</span><span class="pub-nolink">No public link yet</span></span>
+          </div>
+        </article>
+        <article class="pub-card" data-pub="p26">
+          <div class="pub-meta-row"><span class="pub-journal">The Journal of Philosophy</span><span class="pub-year">Under review</span></div>
+          <h3 class="pub-title"><button type="button" class="pub-open" aria-controls="pub-side" aria-expanded="false">The death of empirical knowledge: a paradox of contemporary epistemology, a narrative perspective of early career researchers</button></h3>
+          <p class="pub-authors"><strong>Dugan C</strong> &amp; Budden T. <em>The Journal of Philosophy</em>.</p>
+          <div class="pub-foot">
+            <span class="pub-tags">Epistemology · Early Career Research</span>
+            <span class="pub-actions"><span class="pub-peek is-empty" aria-hidden="true">Details</span><span class="pub-nolink">No public link yet</span></span>
+          </div>
+        </article>
+      </div>
+
+      <div class="subhead">Doctoral research</div>
+      <div class="thesis-card">
+        <div class="pub-meta-row">
+          <span class="pub-journal">University of Western Australia</span>
+          <span class="pub-year">2024</span>
+          <span class="pub-tag">Iron Deficiency</span>
+          <span class="pub-tag">Women's Health</span>
+          <span class="pub-tag highlight">Doctoral Thesis</span>
+        </div>
+        <div class="pub-title">Iron and women's health: a multidimensional exploration of iron deficiency, management, and treatment in active females</div>
+        <div class="pub-authors" style="margin-top:8px"><strong>Dugan C</strong>. University of Western Australia, School of Human Sciences. Supervised by Prof. Peter Peeling and Prof. Toby Richards.</div>
+      </div>
+
+      <div class="subhead">Conference proceedings and symposia</div>
+      <div class="conf-list">
+        <div class="conf-item">
+          <div class="conf-title">Residence at moderate altitude increases hemoglobin mass, but does not affect plasma volume: findings from the military nutrition and health examination survey</div>
+          <div class="conf-meta"><strong>Dugan C</strong>. Pennington Biomedical Research Center Symposium, Baton Rouge, Louisiana, USA, 2025</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">TikTok videos on iron deficiency: a cross-sectional content analysis</div>
+          <div class="conf-meta">Lim J, MacLean B, <strong>Dugan C</strong>, Hines E, Clement I, Richards T. 24th Annual Symposium on Patient Blood Management, Haemostasis and Thrombosis (NATA), Bologna, Italy, 2024</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The effect of intravenous iron therapy on physical capacity, fatigue scores, and quality of life in iron-deficient recreationally active females of reproductive age (IRONWOMAN trial)</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Peeling P, MacLean B, Lim J, Jayasuriya P, Richards T. 24th Annual Symposium on Patient Blood Management (NATA), Bologna, Italy, 2024</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">Intravenous iron leads to lower rates of anaemia in Australia</div>
+          <div class="conf-meta">Fuller J, MacLean B, Lim J, <strong>Dugan C</strong>, Abeysiri S, Richards T. 24th Annual Symposium on Patient Blood Management (NATA), Bologna, Italy, 2024</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">What is 'normal' iron metabolism in response to inflammation in ultramarathon runners</div>
+          <div class="conf-meta">Fuller J, Nguyen H, MacLean B, Lim J, <strong>Dugan C</strong>, Al-Sharea A, Richards T. 24th Annual Symposium on Patient Blood Management (NATA), Bologna, Italy, 2024</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">Screening and assessing the interrelation and impact of anaemia, iron status, and menstrual blood loss in recreationally active women of reproductive age</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Davies A, Buissink P, Simpson A, Peeling P, Richards T. 23rd Annual Symposium on Patient Blood Management, Haemostasis and Thrombosis, Athens, Greece, 2023</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">Systematic review and meta-analysis of intravenous iron therapy for adults with non-anaemic iron deficiency</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Cabolis K, Miles L, Richards T. Annual Symposium on Patient Blood Management (NATA), 2022 (virtual)</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The effect of acute hypoxia on blood glucose levels and carbohydrate oxidation rates during moderate intensity exercise in individuals with type 1 diabetes</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Maloney S, Abramoff K, Panag S, Davis E, Jones T, Fournier P. Sports Medicine Australia Annual Conference, 2021 (virtual)</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The need to screen for anaemia in female populations</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Scott C, Abeysiri S, Raobaikady R, Richards T. Sports Medicine Australia Annual Conference, 2021 (virtual). Abstract in <em>Journal of Science and Medicine in Sport</em> 2021;24:S30-S31.</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The effect of acute hypoxia on blood glucose levels and carbohydrate oxidation rates during moderate intensity exercise in individuals with type 1 diabetes</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Maloney S, Abramoff K, Panag S, Davis E, Jones T, Fournier P. Exercise &amp; Sports Science Australia Research to Practice, 2021 (virtual)</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The misogyny of iron deficiency</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, MacLean B, Cabolis K, Abeysiri S, Khong A, Sajic M, Richards T (on behalf of the Women's Health Research Collaborative). Exercise &amp; Sports Science Australia Research to Practice, 2021 (virtual)</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The need to screen for anaemia in fit and healthy women</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Scott C, Abeysiri S, Raobaikady R, Richards T. 21st Annual NATA Symposium, 2021 (virtual)</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The misogyny of iron deficiency</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, MacLean B, Cabolis K, Abeysiri S, Khong A, Sajic M, Richards T (on behalf of the Women's Health Research Collaborative). International Sarcopenia Translational Research Conference (ISTRC), 2021 (virtual)</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">"Are you really fit and healthy?"</div>
+          <div class="conf-meta">Scott C, Abeysiri S, McAleavy R, <strong>Dugan C</strong>, Raobaikady R, Richards T. 21st Annual NATA Symposium on Patient Blood Management, Haemostasis and Thrombosis, 2021 (virtual)</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">"Is fingerprick testing accurate to identify iron deficiency?"</div>
+          <div class="conf-meta">Abeysiri S, Scott C, <strong>Dugan C</strong>, Raobaikady R, Richards T. 21st Annual NATA Symposium on Patient Blood Management, Haemostasis and Thrombosis, 2021 (virtual)</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The effect of acute hypoxia on blood glucose levels and carbohydrate oxidation rates during moderate intensity exercise in individuals with type 1 diabetes: final results</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Maloney S, Abramoff K, Panag S, Davis E, Jones T, Fournier P. Child Health Symposium, Perth Children's Hospital, Western Australia, 2019</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The effect of acute hypoxia on blood glucose levels and carbohydrate oxidation rates during moderate intensity exercise in individuals with type 1 diabetes: preliminary findings</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Maloney S, Abramoff K, Panag S, Davis E, Jones T, Fournier P. Telethon Kids Institute Children's Diabetes Centre Symposium, Perth, Western Australia, 2019</div>
+        </div>
+        <div class="conf-item">
+          <div class="conf-title">The effect of acute hypoxia on blood glucose levels and carbohydrate oxidation rates during moderate intensity exercise in individuals with type 1 diabetes: rationale and design of research</div>
+          <div class="conf-meta"><strong>Dugan C</strong>, Maloney S, Abramoff K, Panag S, Davis E, Jones T, Fournier P. Telethon Kids Institute Children's Diabetes Centre Symposium, Perth, Western Australia, 2018</div>
+        </div>
+      </div>
+
+        </div>
+        <aside id="pub-side" aria-label="Paper summary" tabindex="-1">
+          <div class="ps-empty">
+            <p class="ps-kicker">Paper summaries</p>
+            <p class="ps-title">Select a paper</p>
+            <p>Each summary is one screen: the question, what was found, and a small figure. Everything in it is read from the paper itself, and every number carries its source underneath.</p>
+            <p class="ps-hint">Use the link on each card to go straight to the paper.</p>
+          </div>
+          <div class="ps-body" hidden></div>
+        </aside>
+      </div>
+
+      <p style="margin-top:var(--space-10)"><a class="btn btn-ghost" href="https://scholar.google.com/citations?user=p0WPZ_sAAAAJ&hl=en" target="_blank" rel="noopener">View full profile on Google Scholar</a></p>
+    </div>
+  </section>
+
+  <section class="ctaband">
+    <div class="wrap-narrow" style="text-align:center">
+      <h2>Work with me</h2>
+      <p class="lead" style="margin:var(--space-5) auto 0;max-width:56ch">Book a call to talk about an industry or collaboration project.</p>
+      <div class="cta-row" style="justify-content:center;margin-top:var(--space-8)">
+        <a class="btn btn-on" href="https://calendar.app.google/Y9RtpBNtxoSQ2jo78">Book a consultation</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script type="application/json" id="pub-data">
+{
+"p01": {
+"short": "Caloric restriction and iron",
+"kind": "Randomised trial",
+"q": "Does a two-year programme aiming for 25% caloric restriction, without malnutrition, harm iron status or raise the risk of anaemia in healthy adults?",
+"fig": {
+"type": "balance",
+"top": "218 healthy adults analysed",
+"a": "Caloric restriction",
+"b": "Usual diet",
+"out": "No group difference in iron or hepcidin",
+"note": "Bloods at baseline, 12 and 24 months",
+"alt": "Two hundred and eighteen healthy adults were randomised to a caloric restriction programme or their usual diet, with bloods at baseline, 12 and 24 months. Iron status and hepcidin did not differ between groups."
+},
+"find": [
+"No group by time differences in markers of anaemia, iron status or hepcidin over two years.",
+"Anaemia prevalence stayed above 5% in both groups at every timepoint, despite a surveillance protocol.",
+"Everyone took a multivitamin with 18 mg of iron, so the result applies to restriction without malnutrition."
+],
+"why": "Long-term caloric restriction is studied for healthy ageing, and this trial suggests it need not cost iron when nutrition is adequate.",
+"src": "Abstract, Dugan C et al. The Journal of Nutrition 2026;156(5):101474. Trial: CALERIE Phase 2. Volume and issue from the Crossref record."
+},
+"p02": {
+"short": "The IRONWOMAN trial",
+"kind": "Randomised controlled trial",
+"q": "In active women who are iron deficient but not anaemic, does intravenous iron improve exercise performance, fatigue and mood?",
+"fig": {
+"type": "fork",
+"start": "26 active women, low iron, not anaemic",
+"arms": [
+"Intravenous iron",
+"Placebo"
+],
+"out": "Better iron, economy and fatigue",
+"marks": "Tested at 4 days and 4 weeks",
+"alt": "Twenty-six active women with iron deficiency without anaemia were randomised to intravenous iron or placebo and tested at 4 days and 4 weeks. Iron status, running economy and fatigue improved with iron."
+},
+"find": [
+"Intravenous iron raised ferritin, serum iron and transferrin saturation, with a highly variable response between women.",
+"Peak oxygen uptake, lactate threshold and haemoglobin mass did not differ between groups.",
+"Running economy and fatigue scores improved with iron at 4 weeks; mood and quality of life did not change."
+],
+"why": "Intravenous iron is used more and more in active women, and this is double-blind placebo-controlled evidence on what it does and does not change.",
+"src": "Abstract, Dugan C et al. British Journal of Sports Medicine 2025;59(13):921. Trial registration ACTRN12620001357943. Volume and issue from the Crossref record."
+},
+"p03": {
+"short": "Carbon monoxide in sport",
+"kind": "Editorial",
+"q": "Carbon monoxide is used to measure haemoglobin mass. Should athletes also inhale it to raise haemoglobin mass?",
+"fig": {
+"type": "versus",
+"a": {
+"h": "Small inhaled dose",
+"s": "Measures haemoglobin mass"
+},
+"b": {
+"h": "Repeated dosing to boost it",
+"s": "Narrow safety margin"
+},
+"alt": "A small inhaled dose of carbon monoxide is a legitimate way to measure haemoglobin mass. Repeated dosing to boost it carries a narrow safety margin."
+},
+"find": [
+"The rebreathing method uses about 1 mL of carbon monoxide per kg of body mass and is an accepted way to measure haemoglobin mass.",
+"Five studies have tested carbon monoxide inhalation as a performance aid, with mixed effects on performance.",
+"Carbon monoxide binds haemoglobin over 200 times more strongly than oxygen, so small amounts raise the risk of toxicity, and misuse would be hard to detect because it clears quickly and looks like environmental exposure."
+],
+"why": "The authors argue that using carbon monoxide for direct performance gain is misguided and call for education, regulation and oversight.",
+"src": "Full text, Dugan C, Hennigar S. British Journal of Sports Medicine 2025;59(11):749. Volume and issue from the Crossref record."
+},
+"p04": {
+"short": "Anaemia in the United Kingdom and Australia",
+"kind": "Cross-sectional study",
+"q": "How common are anaemia and heavy menstrual bleeding in women of reproductive age in the United Kingdom compared with Australia?",
+"fig": {
+"type": "bars",
+"items": [
+{
+"l": "United Kingdom",
+"v": 19.2,
+"t": "19.2%",
+"hi": true
+},
+{
+"l": "Australia",
+"v": 9.7,
+"t": "9.7%"
+}
+],
+"max": 25,
+"axis": "Women anaemic, haemoglobin below 120 g/L",
+"alt": "Anaemia in 19.2 percent of women screened in the United Kingdom against 9.7 percent in Australia."
+},
+"find": [
+"1937 women screened: 333 in the United Kingdom and 1604 in Australia; 33.7% reported heavy menstrual bleeding.",
+"Heavy menstrual bleeding was more common in the United Kingdom (45.9% against 31.2%).",
+"In Australia 24.7% reported receiving intravenous iron, and those women were less likely to be anaemic."
+],
+"why": "Heavy periods are a common and often normalised cause of anaemia, and where intravenous iron is accessible may shape how much anaemia a country carries.",
+"src": "Summary, MacLean B et al. British Journal of Haematology 2025;206(5):1479. Finger-prick haemoglobin, screening events 2016 to 2024. Volume and issue from the Crossref record."
+},
+"p05": {
+"short": "Low phosphate after intravenous iron",
+"kind": "Research letter",
+"q": "Before major abdominal surgery, does ferric carboxymaltose cause low blood phosphate, and does that matter to patients?",
+"fig": {
+"type": "bars",
+"items": [
+{
+"l": "Ferric carboxymaltose",
+"v": 26,
+"t": "26% (51 of 194)",
+"hi": true
+},
+{
+"l": "Placebo",
+"v": 4.5,
+"t": "4.5% (9 of 198)"
+}
+],
+"max": 40,
+"labelWidth": 132,
+"axis": "Low phosphate before surgery, below 0.8 mmol/L",
+"alt": "Low phosphate before surgery in 26 percent of patients given ferric carboxymaltose against 4.5 percent given placebo."
+},
+"find": [
+"In the PREVENTT trial, ferric carboxymaltose lowered preoperative phosphate and raised fibroblast growth factor 23 (FGF23), a phosphate-regulating hormone.",
+"Low phosphate was about 9 times more likely than with placebo.",
+"Among patients given ferric carboxymaltose, phosphate below 0.65 mmol/L was linked to a longer hospital stay (median 12 against 9 days) and fewer days alive and out of hospital."
+],
+"why": "Low phosphate after this iron formulation is often treated as a harmless laboratory result; in surgical patients it may not be.",
+"src": "Results, Richards T et al. JAMA Network Open 2025;8(4):e253093. Secondary analysis of the PREVENTT trial."
+},
+"p06": {
+"short": "Iron in pregnancy",
+"kind": "Consensus statement",
+"q": "How should iron deficiency in pregnancy be found and treated in Australia?",
+"fig": {
+"type": "gestation",
+"marks": [
+{
+"w": [
+10,
+10
+],
+"l": "Ferritin at booking"
+},
+{
+"w": [
+24,
+28
+],
+"l": "Again at 24 to 28 weeks"
+}
+],
+"rule": "Below 30 µg/L is deficient",
+"out": "Oral iron first, intravenous if needed",
+"alt": "Screen ferritin at booking and again at 24 to 28 weeks. A ferritin below 30 micrograms per litre defines iron deficiency. Offer oral iron first and intravenous iron when oral iron fails or in the third trimester."
+},
+"find": [
+"Routine ferritin screening for all pregnant women at booking and at 24 to 28 weeks, repeated at 36 weeks if indicated.",
+"Iron deficiency in pregnancy defined as a ferritin below 30 µg/L.",
+"Oral iron first, with alternate-day dosing an option to limit side effects, and intravenous iron for women who cannot tolerate or do not respond to oral iron, or in the third trimester."
+],
+"why": "The statement notes obstetric iron deficiency affects up to 70% of Australian pregnancies, yet consensus on finding and managing it had been lacking.",
+"src": "Abstract, Clarke L et al. Internal Medicine Journal 2025. Haematology in Obstetrics and Women's Health Collaborative, graded with the Grading of Recommendations Assessment, Development and Evaluation (GRADE) system."
+},
+"p07": {
+"short": "Community iron screening",
+"kind": "Screening study",
+"q": "Will women in the community accept screening for iron deficiency, and what could a simple screening tool include?",
+"fig": {
+"type": "stats",
+"items": [
+{
+"v": "640",
+"l": "women screened in 5 days"
+},
+{
+"v": "28%",
+"l": "heavy menstrual bleeding"
+},
+{
+"v": "12%",
+"l": "anaemic"
+}
+],
+"alt": "Six hundred and forty women screened in five days; 28 percent had heavy menstrual bleeding and 12 percent were anaemic."
+},
+"find": [
+"640 eligible women were recruited across 5 days, well past the 323 needed, so screening was well accepted.",
+"In the past 2 years, 52% had been diagnosed with iron deficiency or anaemia and 33% had had an intravenous iron infusion.",
+"Hand grip strength rose with both haemoglobin and ferritin, a lead for a future non-invasive tool."
+],
+"why": "Women with heavy menstrual bleeding were more likely to report symptoms and a past diagnosis, so the authors suggest future screening tools consider asking about periods.",
+"src": "Abstract, MacLean B et al. Vox Sanguinis 2025;120(1):22. Community screening in Western Australia, women aged 18 to 49. Volume and issue from the Crossref record."
+},
+"p09": {
+"short": "Iron and women's health, the thesis",
+"kind": "Doctoral thesis summary",
+"q": "What is the impact of iron deficiency in active women, and how should it be found and treated?",
+"fig": {
+"type": "pillars",
+"roof": "Iron and women's health",
+"items": [
+"Understand: two reviews",
+"Screen: 1659 women, three countries",
+"Treat: the IRONWOMAN trial"
+],
+"alt": "Three themes: understanding iron deficiency through two reviews, screening 1659 women across three countries, and treating it in the IRONWOMAN trial."
+},
+"find": [
+"A meta-analysis of 21 studies (3514 participants) found very low quality evidence for intravenous iron on function, fatigue and quality of life.",
+"Screening 1659 women across three countries found heavy menstrual bleeding, iron deficiency and anaemia common and linked.",
+"In IRONWOMAN, intravenous iron improved iron status, exercise economy and fatigue, with a highly variable individual response."
+],
+"why": "Individual variation in response challenges a one-size-fits-all approach to treating iron deficiency in active women.",
+"src": "Full text, Dugan C. British Journal of Sports Medicine 2024 (Doctor of Philosophy Academy Award)."
+},
+"p10": {
+"short": "Oxidised albumin after muscle damage",
+"kind": "Laboratory study",
+"q": "After muscle-damaging exercise, how does a blood marker of oxidative stress, thiol-oxidised albumin, rise and fall over time?",
+"fig": {
+"type": "bars",
+"items": [
+{
+"l": "Strength, soreness, creatine kinase",
+"v": 6,
+"t": "6 days"
+},
+{
+"l": "Thiol-oxidised albumin",
+"v": 10,
+"t": "10 days",
+"hi": true
+}
+],
+"max": 14,
+"labelWidth": 132,
+"axis": "Days raised after eccentric exercise",
+"alt": "Standard markers of muscle damage returned to baseline within 6 days; thiol-oxidised albumin stayed raised for 10 days."
+},
+"find": [
+"Seven men completed eccentric exercise and a no-exercise condition, collecting daily dried blood spots.",
+"Thiol-oxidised albumin rose above baseline within 24 to 48 hours of exercise.",
+"The usual markers recovered within 6 days, while thiol-oxidised albumin stayed raised for 10 days and tracked muscle soreness moderately."
+],
+"why": "Because it outlasts the usual markers, thiol-oxidised albumin may be a useful marker of muscle repair, measurable from a finger-prick blood spot.",
+"src": "Abstract, James C et al. European Journal of Applied Physiology 2024."
+},
+"p11": {
+"short": "Iron and physical capacity, a protocol",
+"kind": "Review protocol",
+"q": "Does oral or intravenous iron improve physical capacity, quality of life and fatigue in people who are iron deficient but not anaemic?",
+"fig": {
+"type": "inputs",
+"input": "Trial",
+"mid": "Pool each participant's data",
+"out": "Two-stage meta-analysis",
+"note": "Search seven databases and registries",
+"alt": "Search seven databases and trial registries, pool individual participant data from every available trial, and analyse it in two stages."
+},
+"find": [
+"Trials and aggregate meta-analyses on iron without anaemia have given conflicting answers.",
+"This protocol will pool individual patient data from every available trial rather than published averages.",
+"The authors describe the individual patient data approach as novel for this question."
+],
+"why": "Pooling each participant's data can help show which participant characteristics change the response to iron, which published averages cannot.",
+"src": "Abstract, Dugan C et al. Systematic Reviews 2024;13:182. Registration PROSPERO CRD42020191739."
+},
+"p12": {
+"short": "Heavy periods, iron and anaemia in active women",
+"kind": "Cross-sectional screening study",
+"q": "In exercising women, how are heavy menstrual bleeding, iron deficiency and anaemia related?",
+"fig": {
+"type": "funnel",
+"items": [
+{
+"t": "1042",
+"l": "completed the questionnaire"
+},
+{
+"t": "887",
+"l": "gave a finger-prick sample"
+},
+{
+"t": "104",
+"l": "had follow-up iron studies"
+},
+{
+"t": "51",
+"l": "iron deficient"
+}
+],
+"alt": "Of 1042 active women who completed the questionnaire, 887 gave a finger-prick sample, 104 had follow-up iron studies and 51 were iron deficient."
+},
+"find": [
+"10.6% were anaemic (haemoglobin below 120 g/L), and about half of those followed up were iron deficient (ferritin below 30 µg/L).",
+"30.9% had heavy menstrual bleeding by survey response.",
+"Women with heavy menstrual bleeding were more likely to report a past diagnosis of iron deficiency or anaemia."
+],
+"why": "Heavy menstrual bleeding is a risk factor for iron deficiency that active women and those around them often overlook.",
+"src": "Abstract, Dugan C et al. Journal of Science and Medicine in Sport 2024."
+},
+"p13": {
+"short": "How active women rate iron treatment",
+"kind": "Survey study",
+"q": "How do exercising women with iron deficiency describe its impact, and how do they feel about iron tablets against iron infusions?",
+"fig": {
+"type": "bars",
+"items": [
+{
+"l": "Iron infusion",
+"v": 0.79,
+"t": "0.74 to 0.79",
+"hi": true
+},
+{
+"l": "Iron tablets",
+"v": 0.47,
+"t": "0.44 to 0.47"
+}
+],
+"max": 1,
+"axis": "Mean sentiment, 0 neutral to 1 positive",
+"alt": "Mean sentiment toward iron infusion ranged 0.74 to 0.79, against 0.44 to 0.47 toward iron tablets."
+},
+"find": [
+"403 exercising women with current or past iron deficiency answered open-ended questions, scored by sentiment analysis.",
+"Sentiment about iron deficiency symptoms was strongly negative, with fatigue seen as hurting performance and recovery.",
+"Infusions drew strongly positive sentiment, tablets moderately positive, and many felt tablets had no effect."
+],
+"why": "How women perceive iron deficiency and its treatment may differ from their doctors' interpretation, and knowing it can help define what patients expect from treatment.",
+"src": "Abstract, Dugan C et al. Patient Preference and Adherence 2023."
+},
+"p14": {
+"short": "New non-iron treatments for anaemia",
+"kind": "Scoping review",
+"q": "What treatments other than iron and erythropoiesis-stimulating agents have been tested for anaemia, and have any been tried in surgery?",
+"fig": {
+"type": "funnel",
+"items": [
+{
+"t": "5719",
+"l": "records found"
+},
+{
+"t": "48",
+"l": "potentially relevant"
+},
+{
+"t": "8",
+"l": "studies included"
+},
+{
+"t": "0",
+"l": "in surgical patients"
+}
+],
+"alt": "5719 records, 48 potentially relevant, 8 studies included, none in surgical patients."
+},
+"find": [
+"The 8 studies tested drugs that block inflammatory signals or hepcidin, in rheumatoid arthritis, cancer and after heart attack.",
+"Most reported a benefit to haemoglobin, but populations and outcome reporting varied widely.",
+"The strongest evidence was for canakinumab, which raised haemoglobin at 12 months in a large trial after heart attack."
+],
+"why": "No study had tested these agents for anaemia around surgery, which is the gap the review points to.",
+"src": "Results and discussion, Davies AT et al. Transfusion 2023. Search run 28 August 2021."
+},
+"p15": {
+"short": "Morning or evening iron for dancers",
+"kind": "Intervention study",
+"q": "For dancers with low iron stores, does it matter whether the daily iron supplement is taken in the morning or the evening?",
+"fig": {
+"type": "stats",
+"items": [
+{
+"v": "+25.9",
+"l": "µg/L ferritin, morning iron"
+},
+{
+"v": "+22.3",
+"l": "µg/L ferritin, evening iron"
+},
+{
+"v": "−30.2",
+"l": "µg/L ferritin, no supplement"
+}
+],
+"cap": "Mean change in ferritin over 8 weeks.",
+"alt": "Ferritin rose 25.9 micrograms per litre with morning iron and 22.3 with evening iron, and fell 30.2 with no supplement."
+},
+"find": [
+"14 ballet and contemporary dancers with ferritin below 50 µg/L took 105 mg of elemental iron daily for 8 weeks, in the morning or the evening.",
+"Ferritin rose in both supplemented groups, and the rise did not differ between morning and evening.",
+"A control group of 6 dancers with higher ferritin took nothing, and their ferritin fell."
+],
+"why": "Timing mattered less than taking it: either time of day raised iron stores in these dancers.",
+"src": "Abstract, Attwell C et al. European Journal of Sport Science 2023."
+},
+"p16": {
+"short": "Intravenous iron without anaemia, the meta-analysis",
+"kind": "Systematic review and meta-analysis",
+"q": "In adults who are iron deficient but not anaemic, does intravenous iron improve physical function, fatigue and quality of life?",
+"fig": {
+"type": "stats",
+"items": [
+{
+"v": "21",
+"l": "randomised trials included"
+},
+{
+"v": "3514",
+"l": "participants"
+},
+{
+"v": "+1.77",
+"l": "mL/kg/min peak oxygen uptake"
+}
+],
+"alt": "Twenty-one randomised trials with 3514 participants were included; in the trials that measured it, intravenous iron raised peak oxygen uptake by a mean 1.77 millilitres per kilogram per minute against placebo."
+},
+"find": [
+"Against placebo, intravenous iron raised peak oxygen uptake and improved fatigue, with no overall difference in quality of life.",
+"Ferritin and haemoglobin both rose, and mild adverse events were more common, with no difference in serious ones.",
+"Evidence was rated low or very low for every outcome except fatigue, mostly because of high risk of bias."
+],
+"why": "The signal favours intravenous iron, but the certainty is low, which is why better trials were needed.",
+"src": "Abstract, Dugan C et al. Journal of Cachexia, Sarcopenia and Muscle 2022. An abridged Cochrane review."
+},
+"p17": {
+"short": "Non-iron treatments for anaemia, a protocol",
+"kind": "Scoping review protocol",
+"q": "How have newer anaemia drugs, beyond iron and erythropoiesis-stimulating agents, been studied outside kidney disease, especially around surgery?",
+"fig": {
+"type": "aims",
+"items": [
+"Describe how the drugs work",
+"Chart evidence around surgery",
+"Pick candidates for trials"
+],
+"alt": "Three objectives: describe how the novel agents work, chart the evidence and stage of development around surgery, and pick candidates for future trials."
+},
+"find": [
+"Anaemia before surgery is the strongest predictor of blood transfusion and is linked to worse outcomes.",
+"Some newer agents show promise in chronic kidney disease, but their use elsewhere was unknown.",
+"The review searches publications from 2010 onward in three databases, with two reviewers and a third resolving disagreements."
+],
+"why": "The results are meant to inform future trials around surgery, built on the evidence already established for these agents.",
+"src": "Abstract, Devlin P et al. BMJ Open 2022;12:e059059. Registered on the Open Science Framework."
+},
+"p18": {
+"short": "Rest breaks for outdoor work in the heat",
+"kind": "Simulation study",
+"q": "For outdoor mining work in the heat, do shorter, more frequent rest breaks help workers perform better and feel less strain?",
+"fig": {
+"type": "bars",
+"items": [
+{
+"l": "Current practice, 2 breaks",
+"v": 12858,
+"t": "12,858 m"
+},
+{
+"l": "Shorter breaks, 4 breaks",
+"v": 12094,
+"t": "12,094 m",
+"hi": true
+}
+],
+"max": 15000,
+"labelWidth": 140,
+"axis": "Mean distance walked per 225-minute shift, 37 °C",
+"alt": "Mean distance walked was 12,858 metres with current rest breaks and 12,094 metres with shorter, more frequent breaks, not a significant difference."
+},
+"find": [
+"13 men completed two 225-minute simulated shifts in a 37 °C heat chamber, with 45 minutes of rest split two ways.",
+"Distance covered did not differ between the two break schedules.",
+"Heart rate and thermal discomfort were higher late in the current-practice trial; cognition, fatigue and hydration did not differ."
+],
+"why": "The authors conclude current break practice should stay until it is tested on a real mine site in summer.",
+"src": "Abstract, Uchiyama K, King J et al. European Journal of Applied Physiology 2022."
+},
+"p19": {
+"short": "Dietary iron for elite dancers",
+"kind": "Narrative review",
+"q": "Why are dancers at high risk of iron deficiency, and how can oral iron be made to work better for them?",
+"fig": {
+"type": "chain",
+"items": [
+"Lean physique goals",
+"Low energy availability",
+"Less iron in the diet",
+"Iron deficiency, then anaemia"
+],
+"alt": "Lean physique goals can lead to low energy availability, which lowers dietary iron and can progress to iron deficiency and then anaemia."
+},
+"find": [
+"Aesthetic demands can push dancers toward dietary restriction and low energy availability.",
+"A low energy diet carries less iron, so iron deficiency is common when energy availability is low.",
+"The review brings together dancer and athlete studies on causes and on strategies to optimise absorption from oral iron."
+],
+"why": "Most iron research in sport comes from endurance athletes, and dancers need guidance that fits their training and physique demands.",
+"src": "Abstract, Attwell C et al. Nutrients 2022;14:1936."
+},
+"p20": {
+"short": "The misogyny of iron deficiency",
+"kind": "Narrative review",
+"q": "How has women's health been overlooked in the history and care of iron deficiency, and what should change?",
+"fig": {
+"type": "dated",
+"items": [
+{
+"l": "Chlorosis, ‘hysteria’"
+},
+{
+"d": "1687",
+"l": "Iron filings in cold wine"
+},
+{
+"d": "1832",
+"l": "Blaud's pills"
+},
+{
+"d": "Today",
+"l": "Still overlooked"
+}
+],
+"alt": "A timeline: iron deficiency was once called chlorosis and linked to hysteria, treated with iron filings in cold wine in 1687, then with Blaud's pills from 1832, and is still overlooked today."
+},
+"find": [
+"Population screening shows iron deficiency in 12 to 18% of apparently fit and healthy women, most often from heavy menstrual bleeding.",
+"Women are defined as anaemic at a lower haemoglobin than men, although anaemia is associated with worse outcomes around anaesthesia.",
+"Reduced exercise performance is linked to iron deficiency independent of haemoglobin."
+],
+"why": "The authors call for investigating iron deficiency in women rather than accepting the dogma of normality, including before anaesthesia.",
+"src": "Summary and introduction, Dugan C et al. Anaesthesia 2021. Women's Health Research Collaborative."
+},
+"p21": {
+"short": "Altitude, exercise and type 1 diabetes",
+"kind": "Laboratory study",
+"q": "Does exercising at simulated high altitude change blood glucose in people with type 1 diabetes?",
+"fig": {
+"type": "altitude",
+"top": "7 adults with type 1 diabetes, 60 min cycling",
+"low": "Sea level",
+"high": "4200 m",
+"out": "Glucose lower after hypoxia",
+"alt": "Seven adults with type 1 diabetes cycled for 60 minutes at simulated sea level and at about 4200 metres. Blood glucose was lower after exercise in hypoxia."
+},
+"find": [
+"Blood glucose did not fall in the first 30 minutes in either condition.",
+"After an hour and into recovery, glucose was lower in hypoxia than before exercise and than at sea level.",
+"Carbohydrate use was higher in hypoxia before, during and after exercise."
+],
+"why": "Exercise at high altitude may raise the risk of low blood sugar, which current exercise guidelines for type 1 diabetes do not consider.",
+"src": "Abstract, Dugan C et al. The Journal of Clinical Endocrinology and Metabolism 2022;107:1375."
+},
+"p22": {
+"short": "Screening exercising women for anaemia",
+"kind": "Cross-sectional survey",
+"q": "Can a short questionnaire plus a finger-prick haemoglobin test pick up anaemia in exercising women?",
+"fig": {
+"type": "bars",
+"items": [
+{
+"l": "Women with anaemia",
+"v": 58.33,
+"t": "58.3%",
+"hi": true
+},
+{
+"l": "Women without",
+"v": 41.57,
+"t": "41.6%"
+}
+],
+"max": 70,
+"axis": "Reported heavy menstrual bleeding",
+"alt": "Heavy menstrual bleeding was reported by 58.3 percent of women with anaemia against 41.6 percent of women without."
+},
+"find": [
+"300 exercising women at a national fitness festival were screened; 12% had anaemia (haemoglobin below 120 g/L).",
+"43% reported a history of iron deficiency and 43% reported heavy menstrual bleeding.",
+"80 women reported time off work, 1612 days in total, and those with heavy menstrual bleeding were more likely to report days off."
+],
+"why": "There was no screening programme for anaemia in exercising women, and a simple questionnaire with a finger-prick test is recommended.",
+"src": "Abstract, Dugan C et al. Medicine 2021;100(39):e27271."
+},
+"p23": {
+"short": "Iron deficiency in female athletes",
+"kind": "Practitioner article",
+"q": "Why are female athletes prone to iron deficiency, and how is it found and treated?",
+"fig": {
+"type": "stores",
+"items": [
+{
+"v": 35,
+"t": "under 35",
+"l": "Depleted stores"
+},
+{
+"v": 20,
+"t": "under 20",
+"l": "Reduced red cell production"
+},
+{
+"v": 12,
+"t": "under 12",
+"l": "Anaemia, haemoglobin under 115"
+}
+],
+"alt": "Three stages of iron deficiency: depleted iron stores with ferritin under 35, reduced red cell production with ferritin under 20, and anaemia with ferritin under 12 and haemoglobin under 115.",
+"cap": "Ferritin in µg/L, haemoglobin in g/L, as classified in the article's Table 1."
+},
+"find": [
+"Exercise adds iron losses and a temporary rise in hepcidin that interferes with absorption, on top of menstrual losses.",
+"Heavy menstrual bleeding affects up to 30% of women, yet as few as 6% seek medical advice.",
+"Treatment steps up with severity: food first, then oral iron, then intravenous iron."
+],
+"why": "There are no standard guidelines for screening female athletes, so iron deficiency is often missed.",
+"src": "Full text, Dugan C, Hensen W. Sports Injury Bulletin 2025;22(1)."
+},
+"p24": {
+"short": "Iron and the athlete",
+"kind": "Practitioner article",
+"q": "Why do so many athletes run low on iron, and what are the options for treating it?",
+"fig": {
+"type": "stairs",
+"items": [
+"Food first",
+"Oral iron",
+"Parenteral iron"
+],
+"alt": "Three treatment approaches: dietary change with whole foods, oral iron supplements, and parenteral iron.",
+"cap": "Treatment chosen by the level of deficiency, with a dietitian or doctor."
+},
+"find": [
+"Iron deficiency is commonly reported in about 10% of male and 30% of female athletes.",
+"Exercise raises hepcidin 3 to 6 hours later, likely cutting iron absorption in that window.",
+"Vegetarian diets, menstrual losses and low energy intake add to the risk."
+],
+"why": "Knowing why iron runs low helps practitioners pick the right treatment for the level of deficiency.",
+"src": "Full text, Peeling P et al. Nutrition X-Change, Volume 13. Year 2022 from the Zotero record."
+},
+"p08": {
+"none": "This was a conference poster, and its text was not available to summarise, so no summary has been written."
+},
+"p25": {
+"none": "This paper is under review, so there is no published version to summarise yet."
+},
+"p26": {
+"none": "This paper is under review, so there is no published version to summarise yet."
+}
+}
+</script>
+<script>
+/* Publication side panel. Data is the JSON block above, keyed by data-pub.
+   Figures are drawn from the data, in the Visualisation Compendium's shapes
+   (stat tiles, bar chart, funnel, process), so no summary carries hand-drawn
+   numbers that could drift from its text. */
+(function () {
+  var side = document.getElementById('pub-side');
+  if (!side) return;
+  var DATA = {};
+  try { DATA = JSON.parse(document.getElementById('pub-data').textContent); } catch (e) {}
+  var empty = side.querySelector('.ps-empty'), body = side.querySelector('.ps-body');
+  var drawer = window.matchMedia('(max-width: 1100px)');
+  var current = null, lastBtn = null;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function T(x, y, s, cls, anchor) { return '<text x="' + x + '" y="' + y + '" class="' + cls + '"' + (anchor ? ' text-anchor="' + anchor + '"' : '') + '>' + esc(s) + '</text>'; }
+  function R(x, y, w, h, cls, r) { return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + (r || 0) + '" class="' + cls + '"/>'; }
+  function wrap(s, n) { var out = [], line = ''; String(s).split(' ').forEach(function (w) { if ((line + ' ' + w).trim().length > n) { out.push(line.trim()); line = w; } else { line += ' ' + w; } }); if (line.trim()) out.push(line.trim()); return out; }
+  function lines(x, y, s, n, cls, anchor, lh) { return wrap(s, n).map(function (l, i) { return T(x, y + i * (lh || 15), l, cls, anchor); }).join(''); }
+  /* A block of text centred on (cx, cy), both ways: every line is anchored
+     middle with a central baseline, and the block is shifted up by half its
+     height. Used by every shape added on 2026-09-30. */
+  function CB(cx, cy, s, n, cls, lh) {
+    if (s === undefined || s === null || s === '') return '';
+    var ls = wrap(s, n), step = lh || 15, y0 = cy - (ls.length - 1) * step / 2;
+    return ls.map(function (l, i) { return '<text x="' + cx + '" y="' + (y0 + i * step) + '" class="' + cls + '" text-anchor="middle" dominant-baseline="central">' + esc(l) + '</text>'; }).join('');
+  }
+  /* A heading and a sub-line stacked and centred together on (cx, cy). */
+  function STACK(cx, cy, head, sub, n, hcls, scls) {
+    var hl = wrap(head, n).length, sl = sub ? wrap(sub, n).length : 0, lh = 14, gap = sub ? 10 : 0;
+    var total = (hl + sl) * lh + gap, top = cy - total / 2;
+    return CB(cx, top + hl * lh / 2, head, n, hcls, lh) + (sub ? CB(cx, top + hl * lh + gap + sl * lh / 2, sub, n, scls, lh) : '');
+  }
+
+  var FIG = {
+    /* Stat tiles: two or three numbers, the first one solid. */
+    stats: function (f) {
+      var k = f.items.length, W = 360, gap = 10, w = (W - gap * (k - 1)) / k, h = 116;
+      return { vb: '0 0 ' + W + ' ' + h, svg: f.items.map(function (it, i) {
+        var x = i * (w + gap), on = i === 0;
+        /* Number and label centred as one block in the tile (2026-09-30). */
+        /* One number line for every tile: the block is sized by the tallest
+           caption in the row, so numbers align and captions hang below. */
+        var fs = it.v.length > 5 ? 24 : 32, nl = wrap(it.l, Math.floor((w - 20) / 6.6)).length;
+        var maxNl = Math.max.apply(null, f.items.map(function (q) { return wrap(q.l, Math.floor((w - 20) / 6.6)).length; }));
+        var blockH = 32 + 8 + maxNl * 15, top = (h - blockH) / 2;
+        return R(x, 0, w, h, on ? 'pf-p1' : 'pf-p5', 4).replace('/>', ' data-align="row"/>') +
+          '<text x="' + (x + w / 2) + '" y="' + (top + 16) + '" class="' + (on ? 'pf-num-on' : 'pf-num') + '" font-size="' + fs + '" text-anchor="middle" dominant-baseline="central">' + esc(it.v) + '</text>' +
+          CB(x + w / 2, top + 40 + nl * 15 / 2, it.l, Math.floor((w - 20) / 6.6), on ? 'pf-lbl-on' : 'pf-lbl', 15);
+      }).join('') };
+    },
+    /* Bar chart: horizontal bars on a common scale, the highlighted bar solid. */
+    bars: function (f) {
+      var max = f.max || Math.max.apply(null, f.items.map(function (i) { return i.v; }));
+      var lw = f.labelWidth || 120, bw = 360 - lw - 64, rh = 34;
+      var maxL = Math.max.apply(null, f.items.map(function (i) { return wrap(i.l, Math.floor(lw / 7.4)).length; }));
+      var pad = Math.max(0, (maxL - 2) * 13 / 2), h = f.items.length * rh + pad * 2 + (f.axis ? 24 : 4);
+      return { vb: '0 0 360 ' + h, svg: f.items.map(function (it, i) {
+        var y = pad + i * rh, w = Math.max(2, bw * it.v / max);
+        var tx = Math.min(lw + w + 6, 360 - String(it.t).length * 6.8);
+        /* Label and value sit on the bar's centre line (2026-09-30). */
+        var ll = wrap(it.l, Math.floor(lw / 7.4)), ly0 = y + 14 - (ll.length - 1) * 13 / 2;
+        return ll.map(function (l, j) { return '<text x="' + (lw - 8) + '" y="' + (ly0 + j * 13) + '" class="pf-lbl" text-anchor="end" dominant-baseline="central">' + esc(l) + '</text>'; }).join('') +
+          R(lw, y + 5, bw, 18, 'pf-track', 2) + R(lw, y + 5, w, 18, it.hi ? 'pf-p1' : 'pf-p3', 2) +
+          '<text x="' + tx + '" y="' + (y + 14) + '" class="pf-lbl-b" dominant-baseline="central">' + esc(it.t) + '</text>';
+      }).join('') + (f.axis ? T(0, h - 6, f.axis, 'pf-micro') : '') };
+    },
+    /* Funnel: nested stages, narrowing; the last stage solid. */
+    funnel: function (f) {
+      var k = f.items.length, rh = 40, h = k * rh;
+      return { vb: '0 0 360 ' + h, svg: f.items.map(function (it, i) {
+        var w = 340 - i * (200 / Math.max(1, k - 1)), x = (360 - w) / 2, last = i === k - 1;
+        return R(x, i * rh, w, rh - 6, last ? 'pf-p1' : (i === 0 ? 'pf-p4' : 'pf-p3'), 3) +
+          CB(180, i * rh + (rh - 6) / 2, it.t + '  ' + it.l, 60, last ? 'pf-lbl-on' : 'pf-lbl-b');
+      }).join('') };
+    },
+    /* Process: three or four steps left to right, the outcome solid. */
+    flow: function (f) {
+      var k = f.items.length, gap = 14, w = (360 - gap * (k - 1)) / k, h = 92;
+      return { vb: '0 0 360 ' + h, svg: f.items.map(function (s, i) {
+        var x = i * (w + gap), last = i === k - 1;
+        var arrow = last ? '' : '<path d="M' + (x + w + 2) + ' 46 H' + (x + w + gap - 3) + ' M' + (x + w + gap - 7) + ' 42 L' + (x + w + gap - 3) + ' 46 L' + (x + w + gap - 7) + ' 50" class="pf-ln"/>';
+        return R(x, 6, w, 80, last ? 'pf-p1' : 'pf-p5', 4) + CB(x + w / 2, 46, s, Math.floor(w / 6.4), last ? 'pf-lbl-on' : 'pf-lbl-b', 14) + arrow;
+      }).join('') };
+    },
+    /* ---- Shapes from the visualisation compendium, added 2026-09-30 so the
+       summaries stop repeating one flow. Every label inside a box is centred on
+       the box with text-anchor middle and dominant-baseline central (CB below).
+       Each type takes the figure's own words; none adds a number. ---- */
+
+    /* Balance: two arms on a level beam, the shared result underneath. */
+    balance: function (f) {
+      var h = 170;
+      return { vb: '0 0 360 ' + h, svg:
+        CB(180, 9, f.top, 60, 'pf-lbl') +
+        CB(180, 160, f.note, 60, 'pf-lbl') +
+        '<path d="M180 40 V96 M150 102 H210" class="pf-ln"/>' + '<polygon points="180,90 168,102 192,102" class="pf-p3"/>' +
+        '<path d="M40 40 H320" class="pf-ln" stroke-width="2.5"/>' +
+        '<path d="M60 40 L40 56 M60 40 L80 56 M300 40 L280 56 M300 40 L320 56" class="pf-ln"/>' +
+        R(0, 56, 124, 40, 'pf-p5', 4) + CB(62, 76, f.a, 18, 'pf-lbl-b', 14) +
+        R(236, 56, 124, 40, 'pf-p5', 4) + CB(298, 76, f.b, 18, 'pf-lbl-b', 14) +
+        R(0, 112, 360, 34, 'pf-p1', 4) + CB(180, 129, f.out, 60, 'pf-lbl-on') };
+    },
+    /* Randomisation fork: one group splits into two arms; the result sits on
+       the arm it belongs to. */
+    fork: function (f) {
+      var h = 146;
+      return { vb: '0 0 360 ' + h, svg:
+        R(0, 34, 104, 64, 'pf-p5', 4) + CB(52, 66, f.start, 15, 'pf-lbl-b', 14) +
+        '<path d="M104 66 H118 M118 30 V102 M118 30 H130 M118 102 H130" class="pf-ln"/>' +
+        R(130, 12, 100, 36, 'pf-p3', 4) + CB(180, 30, f.arms[0], 15, 'pf-lbl-b', 14) +
+        R(130, 84, 100, 36, 'pf-p5', 4) + CB(180, 102, f.arms[1], 15, 'pf-lbl-b', 14) +
+        '<path d="M232 30 H246 M242 26 L246 30 L242 34" class="pf-ln"/>' +
+        R(250, 0, 110, 60, 'pf-p1', 4) + CB(305, 30, f.out, 16, 'pf-lbl-on', 14) +
+        CB(180, 138, f.marks, 60, 'pf-lbl') };
+    },
+    /* Versus: one thing, two uses, split down the middle. */
+    versus: function (f) {
+      var h = 124;
+      return { vb: (f.top ? '0 0 ' : '0 20 ') + '360 ' + (f.top ? h : h - 20), svg:
+        CB(180, 9, f.top, 60, 'pf-lbl') +
+        R(0, 24, 146, 96, 'pf-p5', 4) + STACK(73, 72, f.a.h, f.a.s, 18, 'pf-lbl-b', 'pf-lbl') +
+        R(214, 24, 146, 96, 'pf-p1', 4) + STACK(287, 72, f.b.h, f.b.s, 18, 'pf-lbl-onb', 'pf-lbl-on') +
+        R(150, 60, 60, 24, 'pf-p5', 12) + CB(180, 72, f.sign || 'versus', 8, 'pf-lbl-b') };
+    },
+    /* Gestation bar: when in pregnancy each step happens, then the rule and
+       the treatment. Positions are weeks out of 40. */
+    gestation: function (f) {
+      var h = 132, wk = function (w) { return w / 40 * 360; };
+      var marks = f.marks.map(function (m) {
+        var x0 = wk(m.w[0]), x1 = wk(m.w[1] || m.w[0]), cx = (x0 + x1) / 2, below = !!m.below;
+        return R(x0 - 2, 30, Math.max(4, x1 - x0 + 4), 18, 'pf-p3', 2).replace('/>', ' style="stroke:var(--grape-600)"/>') +
+          CB(Math.min(Math.max(cx, 58), 302), below ? 60 : 16, m.l, 26, 'pf-lbl-b');
+      }).join('');
+      return { vb: '0 0 360 ' + h, svg:
+        R(0, 34, 360, 10, 'pf-p4', 5) + marks +
+        T(0, 62, '0', 'pf-micro') + T(360, 62, '40 weeks', 'pf-micro', 'end') +
+        R(0, 82, 170, 46, 'pf-p5', 4) + CB(85, 105, f.rule, 24, 'pf-lbl-b', 14) +
+        R(190, 82, 170, 46, 'pf-p1', 4) + CB(275, 105, f.out, 24, 'pf-lbl-on', 14) };
+    },
+    /* Pillars: themes holding up one body of work. */
+    pillars: function (f) {
+      var k = f.items.length, gap = 12, w = (360 - gap * (k - 1)) / k, h = 150;
+      return { vb: '0 0 360 ' + h, svg:
+        R(0, 0, 360, 32, 'pf-p3', 4) + CB(180, 16, f.roof, 60, 'pf-lbl-b') +
+        f.items.map(function (s, i) {
+          var x = i * (w + gap), p = String(s).split(': ');
+          /* Headings share one line across the pillars; sub-lines hang below. */
+          var n = Math.floor((w - 32) / 7), sl = wrap(p[1] || '', n);
+          return R(x + 6, 40, w - 12, 96, 'pf-p5', 0).replace('/>', ' data-align="row"/>') + CB(x + w / 2, 60, p[0], n, 'pf-lbl-b') +
+            (p[1] ? CB(x + w / 2, 82 + (sl.length - 1) * 7, p[1], n, 'pf-lbl', 14) : '');
+        }).join('') +
+        R(0, 140, 360, 8, 'pf-p3', 2) };
+    },
+    /* Inputs: several sources feeding one pooled thing, then the analysis. */
+    inputs: function (f) {
+      var h = 142, ys = [14, 50, 86];
+      return { vb: '0 0 360 ' + h, svg:
+        ys.map(function (y) { return R(0, y, 76, 28, 'pf-p5', 4) + CB(38, y + 14, f.input, 12, 'pf-lbl-b') +
+          '<path d="M76 ' + (y + 14) + ' C100 ' + (y + 14) + ', 104 64, 124 64" class="pf-ln"/>'; }).join('') +
+        R(124, 30, 118, 68, 'pf-p3', 4) + CB(183, 64, f.mid, 17, 'pf-lbl-b', 14) +
+        '<path d="M244 64 H258 M254 60 L258 64 L254 68" class="pf-ln"/>' +
+        R(262, 30, 98, 68, 'pf-p1', 4) + CB(311, 64, f.out, 14, 'pf-lbl-on', 14) +
+        CB(180, 132, f.note, 60, 'pf-lbl') };
+    },
+    /* Numbered aims: peers, each with a numbered marker on top. */
+    aims: function (f) {
+      var k = f.items.length, gap = 12, w = (360 - gap * (k - 1)) / k, h = 104;
+      return { vb: '0 0 360 ' + h, svg: f.items.map(function (s, i) {
+        var x = i * (w + gap);
+        return R(x, 16, w, 84, 'pf-p5', 4) + CB(x + w / 2, 60, s, Math.floor((w - 16) / 6.4), 'pf-lbl-b', 14) +
+          '<circle cx="' + (x + w / 2) + '" cy="16" r="13" class="pf-p1"/>' + CB(x + w / 2, 16, String(i + 1), 2, 'pf-lbl-on');
+      }).join('') };
+    },
+    /* Chain: each link depends on the one before; the last link is the outcome. */
+    chain: function (f) {
+      var k = f.items.length, ov = 8, w = (360 + ov * (k - 1)) / k, h = 92;
+      return { vb: '0 0 360 ' + h, svg: f.items.map(function (s, i) {
+        var x = i * (w - ov), last = i === k - 1;
+        return '<rect x="' + (x + 1.5) + '" y="4" width="' + (w - 3) + '" height="84" rx="40" class="' + (last ? 'pf-p1' : 'pf-p5') + '" stroke-width="2.5" style="stroke:var(--grape-600)"/>';
+      }).join('') + f.items.map(function (s, i) {
+        var x = i * (w - ov), last = i === k - 1;
+        return CB(x + w / 2, 46, s, Math.floor((w - 24) / 7), last ? 'pf-lbl-on' : 'pf-lbl-b', 14);
+      }).join('') };
+    },
+    /* Dated timeline: events on a line, dates above, the present solid. */
+    dated: function (f) {
+      var k = f.items.length, step = 360 / k, h = 116;
+      return { vb: '0 0 360 ' + h, svg: '<path d="M' + step / 2 + ' 40 H' + (360 - step / 2) + '" class="pf-ln"/>' +
+        f.items.map(function (it, i) {
+          var cx = step / 2 + i * step, last = i === k - 1;
+          return (it.d ? CB(cx, 16, it.d, 12, 'pf-num') : '') +
+            '<circle cx="' + cx + '" cy="40" r="' + (last ? 9 : 6) + '" class="' + (last ? 'pf-p1' : 'pf-p5') + '"/>' +
+            CB(cx, 78, it.l, Math.floor(step / 6.6), last ? 'pf-lbl-b' : 'pf-lbl', 14);
+        }).join('') };
+    },
+    /* Altitude: the same exercise at the foot and at the top of a mountain. */
+    altitude: function (f) {
+      var h = 150;
+      return { vb: '0 0 360 ' + h, svg:
+        CB(180, 10, f.top, 60, 'pf-lbl') +
+        '<polygon points="10,138 118,54 226,138" class="pf-p4"/>' + '<path d="M0 138 H236" class="pf-ln"/>' +
+        '<circle cx="30" cy="138" r="6" class="pf-p5"/>' + '<circle cx="118" cy="54" r="7" class="pf-p1"/>' +
+        '<text x="40" y="126" class="pf-lbl-b" dominant-baseline="central">' + esc(f.low) + '</text>' + CB(118, 38, f.high, 26, 'pf-lbl-b') +
+        '<path d="M128 58 C170 64, 210 82, 244 90 M240 86 L244 90 L240 94" class="pf-ln"/>' +
+        R(248, 62, 112, 56, 'pf-p1', 4) + CB(304, 90, f.out, 16, 'pf-lbl-on', 14) };
+    },
+    /* Stores: tins drawn down stage by stage. Fill height is the article's own
+       ferritin cut-off for the stage, on one scale, with the tin standing for a
+       full store at twice the first cut-off so "depleted" never reads full. */
+    stores: function (f) {
+      var k = f.items.length, gap = 18, w = (360 - gap * (k - 1)) / k, top = 8, th = 80, h = 150;
+      var max = Math.max.apply(null, f.items.map(function (i) { return i.v; }));
+      return { vb: '0 0 360 ' + h, svg: f.items.map(function (it, i) {
+        var x = i * (w + gap), fh = th * it.v / (max * 2), last = i === k - 1;
+        /* The label sits in the fill when it fits, otherwise just above it. */
+        var fits = fh >= 24;
+        return R(x + 14, top, w - 28, th, 'pf-p5', 3).replace('/>', ' data-align="row"/>') + R(x + 14, top + th - fh, w - 28, fh, last ? 'pf-p1' : 'pf-p3', 3) +
+          CB(x + w / 2, fits ? top + th - fh / 2 : top + th - fh - 12, it.t, 14, fits && last ? 'pf-lbl-on' : 'pf-lbl-b') +
+          CB(x + w / 2, top + th + 30, it.l, Math.floor(w / 6.4), 'pf-lbl', 14);
+      }).join('') };
+    },
+    /* Staircase: each option a step up from the last; the top step solid. */
+    stairs: function (f) {
+      var k = f.items.length, w = 360 / k, h = 110, base = 108;
+      return { vb: '0 0 360 ' + h, svg: f.items.map(function (s, i) {
+        var bh = 36 + i * 30, x = i * w, last = i === k - 1;
+        return R(x, base - bh, w - 2, bh, last ? 'pf-p1' : (i === 0 ? 'pf-p4' : 'pf-p3'), 2) +
+          CB(x + w / 2, base - bh / 2, s, Math.floor((w - 16) / 6.4), last ? 'pf-lbl-on' : 'pf-lbl-b', 14);
+      }).join('') };
+    }
+  };
+
+  function figure(f) {
+    if (!f || !FIG[f.type]) return '';
+    var d = FIG[f.type](f);
+    return '<figure class="ps-fig"><svg viewBox="' + d.vb + '" role="img" aria-label="' + esc(f.alt || '') + '">' + d.svg + '</svg>' +
+      (f.cap ? '<figcaption>' + esc(f.cap) + '</figcaption>' : '') + '</figure>';
+  }
+
+  function render(card) {
+    var id = card.getAttribute('data-pub'), d = DATA[id];
+    var journal = card.querySelector('.pub-journal').textContent, year = card.querySelector('.pub-year').textContent;
+    var title = card.querySelector('.pub-open').textContent;
+    var href = card.getAttribute('data-href');
+    var close = '<button type="button" class="ps-close" data-close>Close<span class="vh"> summary</span></button>';
+    var linkBtn = href ? '<a class="btn btn-primary" href="' + esc(href) + '" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a>' : '';
+    var h = '<div class="ps-top"><p class="ps-kicker">' + esc(journal) + ' · ' + esc(year) + (d && d.kind ? ' · ' + esc(d.kind) : '') + '</p>' + close + '</div>';
+    if (d && !d.none) {
+      h += '<h3 class="ps-title" id="ps-title">' + esc(d.short) + '</h3>' +
+        '<p class="ps-q">' + esc(d.q) + '</p>' + figure(d.fig) +
+        '<p class="ps-h">What it found</p><ul class="ps-find">' + d.find.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+        (d.why ? '<p class="ps-h">Why it matters</p><p class="ps-why">' + esc(d.why) + '</p>' : '') +
+        '<p class="ps-src"><b>Source.</b> ' + esc(d.src) + '</p>';
+    } else {
+      h += '<h3 class="ps-title ps-title--long" id="ps-title">' + esc(title) + '</h3>' +
+        '<div class="ps-empty-note"><p class="ps-q">' + esc((d && d.none) || 'A summary of this paper has not been written yet.') + '</p></div>';
+    }
+    h += '<div class="ps-actions">' + linkBtn + '</div>';
+    body.innerHTML = h;
+  }
+
+  function setModal(on) {
+    if (on) { side.setAttribute('role', 'dialog'); side.setAttribute('aria-modal', 'true'); side.setAttribute('aria-labelledby', 'ps-title'); side.removeAttribute('aria-label'); }
+    else { side.removeAttribute('role'); side.removeAttribute('aria-modal'); side.removeAttribute('aria-labelledby'); side.setAttribute('aria-label', 'Paper summary'); }
+  }
+
+  function open(card, btn) {
+    if (current) { current.classList.remove('is-open'); current.querySelector('.pub-open').setAttribute('aria-expanded', 'false'); }
+    current = card; lastBtn = btn;
+    card.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true');
+    render(card);
+    empty.hidden = true; body.hidden = false; side.scrollTop = 0;
+    if (drawer.matches) { setModal(true); side.classList.add('is-open'); side.querySelector('[data-close]').focus(); }
+    else { setModal(false); side.focus({ preventScroll: true }); }
+  }
+
+  function close() {
+    if (!current) return;
+    current.classList.remove('is-open'); current.querySelector('.pub-open').setAttribute('aria-expanded', 'false');
+    current = null; side.classList.remove('is-open'); setModal(false);
+    body.hidden = true; body.innerHTML = ''; empty.hidden = false;
+    if (lastBtn) lastBtn.focus({ preventScroll: true });
+  }
+
+  document.querySelectorAll('.pub-card[data-pub]').forEach(function (card) {
+    var btn = card.querySelector('.pub-open');
+    btn.addEventListener('click', function () {
+      if (current === card) { close(); return; }
+      open(card, btn);
+    });
+  });
+  side.addEventListener('click', function (e) { if (e.target.closest('[data-close]')) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!current) return;
+    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+    if (e.key === 'Tab' && drawer.matches) {
+      var f = side.querySelectorAll('a[href], button');
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      else if (!side.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    }
+  });
+  drawer.addEventListener('change', function () { if (current) { setModal(drawer.matches); side.classList.toggle('is-open', drawer.matches); } });
+})();
+</script>
+
+<!-- chrome:footer -->
+<!-- Shared footer. Synced across every page by partials/sync_chrome.py.
+     Contact = hello@drcorydugan.com (Google Workspace mailbox, live 2026-08-20). cory@ remains an alias on it. -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="wm">Dr Cory Dugan</div>
+        <p>Iron-deficiency and women's-health researcher. Screening, one-to-one iron care and research tools.<br>This is not medical advice.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <p class="foot-h">Connect</p>
+          <a href="https://www.linkedin.com/in/cory-dugan-phd" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.instagram.com/dr.cwdugan/" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:hello@drcorydugan.com">Email</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-h">Research</p>
+          <a href="https://scholar.google.com/citations?user=p0WPZ_sAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://orcid.org/0000-0001-5546-3465" target="_blank" rel="noopener">ORCID</a>
+          <a href="https://www.researchgate.net/profile/Cory-Dugan" target="_blank" rel="noopener">ResearchGate</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-fine">© 2026 Dr Cory Dugan · ABN 24 585 381 878 · <a href="mailto:hello@drcorydugan.com">hello@drcorydugan.com</a></div>
+  </div>
+</footer>
+
+<!-- /chrome:footer -->
+
+<script>
+/* Talk: load the Cassyni player only when the thumbnail is pressed. */
+(function () {
+  var b = document.querySelector('.talk-poster');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = b.getAttribute('data-src');
+    f.title = "Breaking the Silence on Women's Health - presented by Cory Dugan and Darsiha Balakirishnan and Fanija Dukovski and Hayley Caratti and Heather Bytheway and Talat Uppal (Cassyni)";
+    f.allow = 'fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+    b.replaceWith(f);
+    f.focus();
+  });
+})();
+</script>
+</body>
+</html>
